@@ -40,13 +40,13 @@ const SearchHeader = () => {
       ref={RootRef}
       className={clsx(
         'w-11/12 min-w-[300px] h-full relative -ms-6',
-        focus ? 'shadow-md' : '',
+        focus ? 'shadow-md dark:shadow-white/5' : '',
         mounted ? '' : 'hidden',
       )}
     >
       <div className="absolute h-full w-full">
         <div className="flex items-center justify-between h-full w-full pe-6">
-          <div className="ps-6">
+          <div className="ps-6 me-1">
             <div className="w-10 h-10 flex justify-center items-center">
               {focus ? (
                 <button onClick={() => setFocus(false)} className="w-4 h-4">
@@ -65,7 +65,7 @@ const SearchHeader = () => {
           </div>
           <div className="flex-1">
             <input
-              className="focus:outline-none bg-bgInputLight py-2 px-3 w-full rounded-full"
+              className="focus:outline-none bg-bgInputLight dark:bg-bgInputDark py-2 px-3 w-full rounded-full"
               type="text"
               placeholder="Nhập từ khóa tìm kiếm"
               onFocus={() => setFocus(true)}
@@ -75,12 +75,17 @@ const SearchHeader = () => {
             />
           </div>
         </div>
-        <div className={clsx('bg-white w-full pb-3 rounded-b-md', focus ? '' : 'hidden')}>
+        <div
+          className={clsx(
+            'bg-white w-full pb-3 rounded-b-md dark:bg-bgContentDark',
+            focus ? '' : 'hidden',
+          )}
+        >
           <ul className={clsx('pt-3 mx-1', history.length > 0 ? '' : 'hidden')}>
             {history.map((item) => (
               <li
                 key={item.id}
-                className="flex justify-between items-center hover:bg-bgHover_l p-2 ps-6 rounded-md cursor-default"
+                className="flex justify-between items-center hover:bg-bgHover_l dark:hover:bg-bgHover_d p-2 ps-6 rounded-md cursor-default"
               >
                 <span>{item.keyword}</span>
                 <button

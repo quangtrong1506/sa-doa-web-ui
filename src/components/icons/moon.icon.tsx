@@ -7,7 +7,7 @@ function MoonIcon(props: SvgProps) {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 384 512"
-      className={clsx('fill-svgDefault w-full h-full', props.className)}
+      className={clsx('fill-svgDefault dark:fill-svgDefault_d w-full h-full', props.className)}
       fill="none"
       {...props}
     >

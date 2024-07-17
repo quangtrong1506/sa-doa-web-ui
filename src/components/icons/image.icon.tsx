@@ -3,7 +3,7 @@ import clsx from 'clsx';
 const ImageIcon = ({ className, ...props }: IconProps) => {
   return (
     <svg
-      className={clsx('w-full h-full fill-svgDefault scale-90', className)}
+      className={clsx('w-full h-full fill-svgDefault dark:fill-svgDefault_d scale-90', className)}
       viewBox="0 0 18 18"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

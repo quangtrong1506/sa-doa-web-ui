@@ -3,7 +3,7 @@ import clsx from 'clsx';
 const HomeIcon = ({ className, ...props }: IconProps) => {
   return (
     <svg
-      className={clsx('w-full h-full fill-svgDefault', className)}
+      className={clsx('w-full h-full fill-svgDefault dark:fill-svgDefault_d', className)}
       viewBox="0 0 22 22"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

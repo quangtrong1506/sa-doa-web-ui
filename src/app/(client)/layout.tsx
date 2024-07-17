@@ -8,11 +8,11 @@ const Layout = ({
   return (
     <div>
       <div className="relative h-[55px] w-full">
-        <div className="fixed w-full z-50 bg-white px-6 shadow-md">
+        <div className="fixed w-full z-50 bg-white dark:bg-bgContentDark px-6 shadow-md border-b dark:border-white/15">
           <Header />
         </div>
       </div>
-      <div className="h-[1000px] bg-bgBody_l">{children}</div>
+      <div className="h-[1000px] bg-bgBody_l dark:bg-bgBody_d">{children}</div>
     </div>
   );
 };

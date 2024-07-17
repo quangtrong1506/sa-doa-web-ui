@@ -1,36 +1,84 @@
 'use client';
+
+import clsx from 'clsx';
 import { useTheme } from 'next-themes';
+import { useEffect, useRef, useState } from 'react';
+import { useClickAway } from 'react-use';
+import CheckIcon from '../icons/check.icon';
 import MoonIcon from '../icons/moon.icon';
 import SunIcon from '../icons/sun.icon';
+import Tooltip from '../reuse/tooltip';
 
 const ThemeSwitch = () => {
-  const { setTheme, resolvedTheme } = useTheme();
+  const { setTheme, theme, resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState<boolean>(false);
+  const [focus, setFocus] = useState<boolean>(false);
+  const rootRef = useRef<HTMLDivElement>(null);
+  useClickAway(rootRef, () => setFocus(false));
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+  if (!mounted) return null;
   return (
-    <button className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-bgHover_l relative">
-      <div className="w-7 h-7">{'dark' ? <SunIcon /> : <MoonIcon />}</div>
-      <div className="absolute min-w-40 top-full bg-white py-3 px-1 shadow-md rounded-md">
+    <div
+      ref={rootRef}
+      onClick={() => {
+        setFocus(true);
+      }}
+      onMouseLeave={() => {
+        setFocus(false);
+      }}
+      className="w-9 h-9 p-1 flex items-center justify-center rounded-full hover:bg-bgHover_l relative cursor-pointer"
+    >
+      <div data-tooltip className={clsx('w-6 h-6 relative')}>
+        {resolvedTheme === 'dark' ? <SunIcon /> : <MoonIcon />}
+        <Tooltip anchor="bottom">
+          {resolvedTheme === 'light' ? 'Chế độ sáng' : 'Chế độ tối'}
+        </Tooltip>
+      </div>
+      <div
+        className={clsx(
+          'absolute min-w-40 top-full bg-white dark:bg-bgContentDark py-3 px-1 shadow-md rounded-md border-t border-black/5 dark:border-white/5',
+          focus ? '' : 'hidden',
+        )}
+      >
         <ul className="text-left">
-          <li className="py-1 px-3 cursor-pointer hover:bg-bgHover_l rounded-md">
-            <input id="light-mode" type="radio" />
-            <label className="ms-2" htmlFor="light-mode">
-              Chế độ sáng
-            </label>
+          <li
+            onClick={() => {
+              setTheme('light');
+            }}
+            className="py-1 px-3 cursor-pointer hover:bg-bgHover_l rounded-md flex justify-start items-center"
+          >
+            <div className={'w-4 h-4'}>
+              <CheckIcon className={theme == 'light' ? '' : 'hidden'} />
+            </div>
+            <span className="ms-2">Chế độ sáng</span>
           </li>
-          <li className="py-1 px-3 cursor-pointer hover:bg-bgHover_l rounded-md">
-            <input id="dark-mode" type="radio" />
-            <label className="ms-2" htmlFor="light-mode">
-              Chế độ sáng
-            </label>
+          <li
+            className="py-1 px-3 cursor-pointer hover:bg-bgHover_l rounded-md flex justify-start items-center"
+            onClick={() => {
+              setTheme('dark');
+            }}
+          >
+            <div className={'w-4 h-4'}>
+              <CheckIcon className={theme == 'dark' ? '' : 'hidden'} />
+            </div>
+            <span className="ms-2">Chế độ tối</span>
           </li>
-          <li className="py-1 px-3 cursor-pointer hover:bg-bgHover_l rounded-md">
-            <input id="auto-mode" type="radio" />
-            <label className="ms-2" htmlFor="light-mode">
-              Tự đông
-            </label>
+          <li
+            className="py-1 px-3 cursor-pointer hover:bg-bgHover_l rounded-md flex justify-start items-center"
+            onClick={() => {
+              setTheme('system');
+            }}
+          >
+            <div className={'w-4 h-4'}>
+              <CheckIcon className={theme == 'system' ? '' : 'hidden'} />
+            </div>
+            <span className="ms-2">Hệ thống</span>
           </li>
         </ul>
       </div>
-    </button>
+    </div>
   );
 };
 

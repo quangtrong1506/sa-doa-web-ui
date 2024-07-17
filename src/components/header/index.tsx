@@ -1,5 +1,8 @@
+'use client';
 import { NAV_LINK } from '@/constants/jsx-constants';
+import Link from 'next/link';
 import NavItem from '../reuse/nav/nav-item';
+import Tooltip from '../reuse/tooltip';
 import ThemeSwitch from '../theme-mode/theme-switch';
 import SearchHeader from './search.header';
 
@@ -16,8 +19,18 @@ const Header = () => {
           ))}
         </div>
       </div>
-      <div className="flex-1 max-w-[360px] h-full flex items-center">
+      <div className="flex-1 max-w-[360px] h-full flex items-center justify-end gap-2">
         <ThemeSwitch />
+        <div>
+          <Link
+            data-tooltip
+            className="font-medium hover:bg-bgHover_l p-2 rounded-md relative"
+            href={'/login'}
+          >
+            Login
+            <Tooltip anchor="left">Đăng nhập tài khoản của bạn</Tooltip>
+          </Link>
+        </div>
       </div>
     </div>
   );

@@ -21,7 +21,7 @@ const NavItem = ({ href, icon, title }: { title: string; href: string; icon: JSX
       data-tooltip
       className={clsx(
         'flex-1 h-[calc(100%_-_8px)] flex items-center justify-center rounded-lg relative',
-        'hover:bg-bgHover_l data-[active=true]:hover:bg-transparent',
+        'hover:bg-bgHover_l dark:hover:bg-bgHover_d data-[active=true]:hover:bg-transparent dark:data-[active=true]:hover:bg-transparent',
         '[&_.dash-active]:data-[active=true]:block [&>svg]:data-[active=true]:fill-main',
         '[&>svg]:!w-[25px] [&>svg]:!h-[25px]',
         loading ? 'hidden' : '',

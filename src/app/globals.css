@@ -20,4 +20,29 @@
   [data-tooltip]:hover .tool-tip {
     display: block;
   }
+  .string-404 {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    animation: move 4s infinite;
+    overflow: hidden;
+  }
+
+  .string-404-root {
+    position: relative;
+    top: 0;
+    animation: white-out 5s infinite;
+  }
+
+  @keyframes move {
+    25% {
+      transform: translatey(-25%);
+    }
+    50% {
+      transform: translatey(-50%);
+    }
+    75% {
+      transform: translatey(-75%);
+    }
+  }
 }
