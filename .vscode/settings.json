@@ -1,3 +1,3 @@
 {
-  "conventionalCommits.scopes": ["Component"]
+  "conventionalCommits.scopes": ["Component", "Root"]
 }
