@@ -1,28 +1,30 @@
+import { Providers } from '@/provider';
 import type { Metadata } from 'next';
-
+import './globals.css';
 export const metadata: Metadata = {
-    title: {
-        default: 'Ốc Sa Đoạ',
-        template: '%s × Ốc Sa Đoạ',
+  title: {
+    default: 'Ốc Sa Đoạ',
+    template: '%s × Ốc Sa Đoạ',
+  },
+  description: 'Ốc Sa Đoạ - Website chia sẻ tài liệu nghiên cứu khoa học lớn nhất thế giới',
+  icons: {
+    icon: {
+      url: '/images/logo.png',
+      type: 'image/png',
     },
-    description: 'Ốc Sa Đoạ - Website chia sẻ tài liệu nghiên cứu khoa học lớn nhất thế giới',
-    icons: {
-        icon: {
-            url: '/images/logo.png',
-            type: 'image/png',
-        },
-        shortcut: { url: '/images/logo.png', type: 'image/png' },
-    },
+    shortcut: { url: '/images/logo.png', type: 'image/png' },
+  },
 };
-
 export default function RootLayout({
-    children,
+  children,
 }: Readonly<{
-    children: React.ReactNode;
+  children: React.ReactNode;
 }>) {
-    return (
-        <html lang="en">
-            <body suppressHydrationWarning>{children}</body>
-        </html>
-    );
+  return (
+    <html lang="en">
+      <body suppressHydrationWarning>
+        <Providers>{children}</Providers>
+      </body>
+    </html>
+  );
 }
