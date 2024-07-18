@@ -6,14 +6,19 @@ import Image from 'next/image';
 import { KeyboardEvent, useEffect, useRef, useState } from 'react';
 import { useClickAway, useDebounce } from 'react-use';
 import ArrowLeftLongIcon from '../icons/arrow-left-long.icon';
+import HistoryIcon from '../icons/history.icon';
+import SearchIcon from '../icons/search.icon';
 import XMarkIcon from '../icons/xmark.icon';
+import Tooltip from '../reuse/tooltip';
 const SearchHeader = () => {
   const [focus, setFocus] = useState<boolean>(false);
   const [history, setHistory] = useState<IHistory[]>([]);
   const [mounted, setMounted] = useState<boolean>(false);
+  const [showInput, setShowInput] = useState<boolean>(false);
   const [keyword, setKeyword] = useState<string>('');
   const RootRef = useRef<HTMLDivElement>(null);
-  useClickAway(RootRef, () => setFocus(false));
+  const InputRef = useRef<HTMLInputElement>(null);
+  useClickAway(RootRef, () => closeSearchInput());
   useEffect(() => {
     setMounted(true);
     setHistory(LOCAL.getSearchHistory());
@@ -24,7 +29,7 @@ const SearchHeader = () => {
       if (keyword) {
         LOCAL.createNewSearchHistory(keyword);
         setHistory(LOCAL.getSearchHistory());
-        e.currentTarget.value = '';
+        setKeyword('');
       }
     }
   };
@@ -35,11 +40,15 @@ const SearchHeader = () => {
     500,
     [keyword],
   );
+  const closeSearchInput = () => {
+    setFocus(false);
+    setShowInput(false);
+  };
   return (
     <div
       ref={RootRef}
       className={clsx(
-        'w-11/12 min-w-[300px] h-full relative -ms-6',
+        'w-full h-full relative -ms-6',
         focus ? 'shadow-md dark:shadow-white/5' : '',
         mounted ? '' : 'hidden',
       )}
@@ -49,7 +58,12 @@ const SearchHeader = () => {
           <div className="ps-6 me-1">
             <div className="w-10 h-10 flex justify-center items-center">
               {focus ? (
-                <button onClick={() => setFocus(false)} className="w-4 h-4">
+                <button
+                  onClick={() => {
+                    closeSearchInput();
+                  }}
+                  className="w-4 h-4"
+                >
                   <ArrowLeftLongIcon />
                 </button>
               ) : (
@@ -65,7 +79,11 @@ const SearchHeader = () => {
           </div>
           <div className="flex-1">
             <input
-              className="focus:outline-none bg-bgInputLight dark:bg-bgInputDark py-2 px-3 w-full rounded-full"
+              ref={InputRef}
+              className={clsx(
+                'focus:outline-none bg-bgInputLight dark:bg-bgInputDark py-2 px-3 w-full rounded-full ',
+                showInput ? 'inline-block' : 'hidden xl:inline-block',
+              )}
               type="text"
               placeholder="Nhập từ khóa tìm kiếm"
               onFocus={() => setFocus(true)}
@@ -73,6 +91,26 @@ const SearchHeader = () => {
               onChange={(e) => setKeyword(e.currentTarget.value)}
               onKeyDown={KeydownHandle}
             />
+            <div
+              className={clsx(
+                'w-9 h-9  justify-center items-center relative',
+                showInput ? 'hidden ' : 'flex xl:hidden',
+              )}
+            >
+              <div
+                className="w-full h-full flex justify-center items-center rounded-full bg-bgHover_l dark:bg-bgHover_d cursor-pointer overflow-hidden"
+                onClick={() => {
+                  setShowInput(true);
+                  setTimeout(() => {
+                    InputRef.current?.focus();
+                  }, 100);
+                }}
+              >
+                <div className="w-6 h-6">
+                  <SearchIcon />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div
@@ -87,7 +125,13 @@ const SearchHeader = () => {
                 key={item.id}
                 className="flex justify-between items-center hover:bg-bgHover_l dark:hover:bg-bgHover_d p-2 ps-6 rounded-md cursor-default"
               >
-                <span>{item.keyword}</span>
+                <span className="w-4 h-4 -mb-1">
+                  <HistoryIcon />
+                </span>
+                <span data-tooltip className="flex-1 ms-6 relative">
+                  <span className="line-clamp-1">{item.keyword}</span>
+                  <Tooltip anchor="right">{item.keyword}</Tooltip>{' '}
+                </span>
                 <button
                   className="w-5 flex justify-center"
                   onClick={() => {

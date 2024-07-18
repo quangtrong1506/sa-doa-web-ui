@@ -4,7 +4,19 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Tooltip from '../tooltip';
-const NavItem = ({ href, icon, title }: { title: string; href: string; icon: JSX.Element }) => {
+const NavItem = ({
+  href,
+  icon,
+  title,
+  className,
+  onClick,
+}: {
+  title: string;
+  href: string;
+  icon: JSX.Element;
+  className?: string;
+  onClick?: () => void;
+}) => {
   const [active, setActive] = useState(false);
   const [loading, setLoading] = useState(true);
   const pathname = usePathname();
@@ -25,8 +37,12 @@ const NavItem = ({ href, icon, title }: { title: string; href: string; icon: JSX
         '[&_.dash-active]:data-[active=true]:block [&>svg]:data-[active=true]:fill-main',
         '[&>svg]:!w-[25px] [&>svg]:!h-[25px]',
         loading ? 'hidden' : '',
+        className,
       )}
       href={href}
+      onClick={(e) => {
+        onClick && onClick();
+      }}
     >
       {icon}
       <div className={clsx('hidden dash-active absolute -bottom-1 w-full h-[2px] bg-main')}></div>

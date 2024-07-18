@@ -25,7 +25,7 @@ const createNewSearchHistory = (keyword: string) => {
       keyword,
       date: new Date().toISOString(),
     });
-  else newHistory.splice(itemIdex, 1);
+  else newHistory[itemIdex] = { ...newHistory[itemIdex], date: new Date().toISOString() };
   localStorage.setItem('searchHistory', JSON.stringify(newHistory));
 };
 const deleteSearchHistory = (id: string) => {

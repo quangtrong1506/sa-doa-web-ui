@@ -28,7 +28,7 @@ const ThemeSwitch = () => {
       onMouseLeave={() => {
         setFocus(false);
       }}
-      className="w-9 h-9 p-1 flex items-center justify-center rounded-full hover:bg-bgHover_l relative cursor-pointer"
+      className="w-9 h-9 p-1 flex items-center justify-center rounded-full bg-bgHover_l dark:bg-bgHover_d relative cursor-pointer"
     >
       <div data-tooltip className={clsx('w-6 h-6 relative')}>
         {resolvedTheme === 'dark' ? <SunIcon /> : <MoonIcon />}
