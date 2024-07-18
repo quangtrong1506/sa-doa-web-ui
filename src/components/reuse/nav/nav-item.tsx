@@ -41,6 +41,7 @@ const NavItem = ({
       )}
       href={href}
       onClick={(e) => {
+        if (href === '#') e.preventDefault();
         onClick && onClick();
       }}
     >

@@ -8,6 +8,7 @@ import AdminPage from '../icons/admin-page.icon';
 import CheckIcon from '../icons/check.icon';
 import LogoutIcon from '../icons/logout.ion';
 import MoonIcon from '../icons/moon.icon';
+import SavedIcon from '../icons/saved.icon';
 import VideoUserIcon from '../icons/view-user.icon';
 import NavOpenDown from '../reuse/nav/nav-open-down';
 
@@ -60,7 +61,7 @@ const NavHeader = () => {
   ];
   return (
     <div className="w-full h-full overflow-x-hidden overflow-y-auto bg-white dark:bg-bgContentDark ">
-      <div className="flex items-center p-6">
+      <div className="flex items-center p-6 max-[480px]:px-2">
         <div className="h-full w-full flex justify-between items-center flex-wrap gap-3">
           <div className="flex">
             <div className="w-12 h-12 overflow-hidden rounded-full border border-main/10">
@@ -100,6 +101,18 @@ const NavHeader = () => {
             </span>
             <span className="font-medium text-black dark:text-white">Xem tất cả trang cá nhân</span>
           </Link>
+          <button className="p-3 dark:hover:bg-bgHover_d hover:bg-bgBody_l rounded-xl w-full">
+            <NavOpenDown items={listThemeMode} label="Chế độ tối" icon={<MoonIcon />} />
+          </button>
+          <Link
+            href={'/saved'}
+            className="flex gap-7 p-3 items-center cursor-pointer dark:hover:bg-bgHover_d hover:bg-bgBody_l rounded-xl w-full"
+          >
+            <span className="w-6 h-6 inline-block">
+              <SavedIcon />
+            </span>
+            <span className="font-medium text-black dark:text-white">Nội dung đã lưu</span>
+          </Link>
           <Link
             href={'/admin'}
             className="flex gap-7 p-3 items-center cursor-pointer dark:hover:bg-bgHover_d hover:bg-bgBody_l rounded-xl w-full"
@@ -109,9 +122,7 @@ const NavHeader = () => {
             </span>
             <span className="font-medium text-black dark:text-white">Admin page</span>
           </Link>
-          <button className="p-3 dark:hover:bg-bgHover_d hover:bg-bgBody_l rounded-xl w-full">
-            <NavOpenDown items={listThemeMode} label="Chế độ tối" icon={<MoonIcon />} />
-          </button>
+
           <button className="flex gap-7 p-3 items-center cursor-pointer dark:hover:bg-bgHover_d hover:bg-bgBody_l rounded-xl w-full">
             <span className="w-6 h-6 inline-block">
               <LogoutIcon />

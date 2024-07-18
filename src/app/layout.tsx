@@ -16,8 +16,6 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: 'website',
-    url: 'https://www.ocsao.com',
-    title: 'Ốc Sa Đoạ',
     description: 'Website chia sẻ tài liệu nghiên cứu khoa học hàng đầu thế giới',
     images: [
       {
