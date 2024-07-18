@@ -104,7 +104,7 @@ const Header = () => {
         <div className="flex-1 max-w-[360px] h-full lg:block hidden">
           <AuthHeader />
         </div>
-        <div className="flex-1 h-full" ref={SearchRef}>
+        <div className="flex-1 h-full lg:hidden" ref={SearchRef}>
           <BigSearchHeader
             closeEvent={() => {
               setIsShowSearchInput(false);
