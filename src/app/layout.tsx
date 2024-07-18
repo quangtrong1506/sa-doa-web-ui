@@ -6,7 +6,7 @@ export const metadata: Metadata = {
     default: 'Ốc Sa Đoạ',
     template: '%s × Ốc Sa Đoạ',
   },
-  description: 'Ốc Sa Đoạ - Website chia sẻ tài liệu nghiên cứu khoa học hàng đầu thế giới',
+  description: 'Website chia sẻ tài liệu nghiên cứu khoa học hàng đầu thế giới',
   icons: {
     icon: {
       url: '/images/logo.png',
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     type: 'website',
     url: 'https://www.ocsao.com',
     title: 'Ốc Sa Đoạ',
-    description: 'Ốc Sa Đoạ - Website chia sẻ tài liệu nghiên cứu khoa học hàng đầu thế giới',
+    description: 'Website chia sẻ tài liệu nghiên cứu khoa học hàng đầu thế giới',
     images: [
       {
         url: '/images/logo.png',
