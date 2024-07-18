@@ -47,7 +47,9 @@ const NavItem = ({
     >
       {icon}
       <div className={clsx('hidden dash-active absolute -bottom-1 w-full h-[2px] bg-main')}></div>
-      <Tooltip anchor="bottom">{title}</Tooltip>
+      <Tooltip anchor="bottom" className="max-[480px]:opacity-0">
+        {title}
+      </Tooltip>
     </Link>
   );
 };
