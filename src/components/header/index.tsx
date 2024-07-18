@@ -30,7 +30,7 @@ const Header = () => {
             {Object.entries(NAV_LINK).map(([key, value]) => (
               <NavItem key={key} href={value.href} title={value.title} icon={value.icon} />
             ))}
-            <div className="flex-1 h-full mt-2" ref={NavRef}>
+            <div className="flex-1 h-full mt-2 lg:hidden" ref={NavRef}>
               <NavItem
                 onClick={() => {
                   setShowNav(true);
