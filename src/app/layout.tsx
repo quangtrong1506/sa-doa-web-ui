@@ -6,13 +6,29 @@ export const metadata: Metadata = {
     default: 'Ốc Sa Đoạ',
     template: '%s × Ốc Sa Đoạ',
   },
-  description: 'Ốc Sa Đoạ - Website chia sẻ tài liệu nghiên cứu khoa học lớn nhất thế giới',
+  description: 'Ốc Sa Đoạ - Website chia sẻ tài liệu nghiên cứu khoa học hàng đầu thế giới',
   icons: {
     icon: {
       url: '/images/logo.png',
       type: 'image/png',
     },
     shortcut: { url: '/images/logo.png', type: 'image/png' },
+  },
+  openGraph: {
+    type: 'website',
+    url: 'https://www.ocsao.com',
+    title: 'Ốc Sa Đoạ',
+    description: 'Ốc Sa Đoạ - Website chia sẻ tài liệu nghiên cứu khoa học hàng đầu thế giới',
+    images: [
+      {
+        url: '/images/logo.png',
+        width: 1200,
+        height: 630,
+        alt: 'Logo Ốc Sa Đoạ',
+      },
+    ],
+    siteName: 'Ốc Sa Đoạ',
+    locale: 'vi_VN',
   },
 };
 export default function RootLayout({

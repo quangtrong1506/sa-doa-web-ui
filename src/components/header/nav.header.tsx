@@ -78,7 +78,7 @@ const NavHeader = () => {
             </div>
           </div>
           <div className="border-b w-full dark:border-white/10"></div>
-          <div className="w-full">
+          <div className="w-full hidden">
             <Link
               className="flex items-center justify-center gap-3 p-3 bg-bgBody_l dark:bg-bgBody_d dark:hover:bg-bgHover_d cursor-pointer rounded-xl w-full "
               href={'/user/me'}
@@ -91,6 +91,15 @@ const NavHeader = () => {
               </span>
             </Link>
           </div>
+          <Link
+            href={'/user/me'}
+            className="flex gap-7 p-3 items-center cursor-pointer dark:hover:bg-bgHover_d hover:bg-bgBody_l rounded-xl w-full"
+          >
+            <span className="w-6 h-6 inline-block">
+              <VideoUserIcon />
+            </span>
+            <span className="font-medium text-black dark:text-white">Xem tất cả trang cá nhân</span>
+          </Link>
           <Link
             href={'/admin'}
             className="flex gap-7 p-3 items-center cursor-pointer dark:hover:bg-bgHover_d hover:bg-bgBody_l rounded-xl w-full"
