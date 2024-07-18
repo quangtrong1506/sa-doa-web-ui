@@ -1,5 +1,5 @@
 'use client';
-import { NAV_LINK } from '@/constants/jsx-constants';
+import { NAV_LINK } from '@/presentation/constants/jsx-constants';
 import clsx from 'clsx';
 import { useEffect, useRef, useState } from 'react';
 import { useClickAway, useWindowSize } from 'react-use';

@@ -1,4 +1,5 @@
-import Header from '@/components/header/';
+import Header from '@/presentation/components/header';
+
 
 const Layout = ({
   children,
@@ -12,7 +13,7 @@ const Layout = ({
           <Header />
         </div>
       </div>
-      <div className="h-[1000px] bg-bgBody_l dark:bg-bgBody_d">{children}</div>
+      <div className="bg-bgBody_l dark:bg-bgBody_d">{children}</div>
     </div>
   );
 };

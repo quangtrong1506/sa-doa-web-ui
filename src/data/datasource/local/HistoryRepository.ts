@@ -1,12 +1,12 @@
-interface IHistory {
-  id: string;
-  keyword: string;
-  date: string;
-}
+import { MyHistory } from '@/data/datasource/local/model/MyHistory';
+
+
+const HISTORY_KEY = 'searchHistory';
+
 const getAllSearchHistory = () => {
-  const history = localStorage.getItem('searchHistory');
+  const history = localStorage.getItem(HISTORY_KEY);
   if (history) {
-    return (JSON.parse(history) as IHistory[]).sort((a, b) => {
+    return (JSON.parse(history) as MyHistory[]).sort((a, b) => {
       return new Date(b.date).getTime() - new Date(a.date).getTime();
     });
   }
@@ -17,35 +17,29 @@ const getSearchHistory = (maxHistory: number = 10) => {
 };
 const createNewSearchHistory = (keyword: string) => {
   const currentHistory = getAllSearchHistory();
-  const newHistory: IHistory[] = [...currentHistory];
+  const newHistory: MyHistory[] = [...currentHistory];
   const itemIdex = newHistory.findIndex((history) => history.keyword === keyword);
-  if (itemIdex === -1)
+  if (itemIdex === -1) {
     newHistory.push({
       id: `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
       keyword,
       date: new Date().toISOString(),
     });
-  else newHistory[itemIdex] = { ...newHistory[itemIdex], date: new Date().toISOString() };
-  localStorage.setItem('searchHistory', JSON.stringify(newHistory));
+  } else {
+    newHistory[itemIdex] = { ...newHistory[itemIdex], date: new Date().toISOString() };
+  }
+  localStorage.setItem(HISTORY_KEY, JSON.stringify(newHistory));
 };
 const deleteSearchHistory = (id: string) => {
   const currentHistory = getAllSearchHistory();
   const updatedHistory = currentHistory.filter((history) => history.id !== id);
-  localStorage.setItem('searchHistory', JSON.stringify(updatedHistory));
+  localStorage.setItem(HISTORY_KEY, JSON.stringify(updatedHistory));
 };
-const getThemeMode = () => {
-  return localStorage.getItem('themeMode') || 'light';
-};
-const setThemeMode = (mode: 'light' | 'dark') => {
-  localStorage.setItem('themeMode', mode);
-};
-const LOCAL = {
+
+const HistoryRepository = {
   getSearchHistory,
   createNewSearchHistory,
-  getThemeMode,
-  setThemeMode,
   deleteSearchHistory,
 };
-export { getSearchHistory };
-export type { IHistory };
-export default LOCAL;
+
+export {HistoryRepository}

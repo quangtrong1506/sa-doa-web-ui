@@ -1,6 +1,5 @@
 'use client';
 
-import LOCAL, { IHistory } from '@/helpers/local.helper';
 import clsx from 'clsx';
 import Image from 'next/image';
 import { KeyboardEvent, useEffect, useRef, useState } from 'react';
@@ -10,9 +9,12 @@ import HistoryIcon from '../icons/history.icon';
 import SearchIcon from '../icons/search.icon';
 import XMarkIcon from '../icons/xmark.icon';
 import Tooltip from '../reuse/tooltip';
+import { MyHistory } from '@/data/datasource/local/model/MyHistory';
+import { HistoryRepository } from '@/data/datasource/local/HistoryRepository';
+
 const SearchHeader = () => {
   const [focus, setFocus] = useState<boolean>(false);
-  const [history, setHistory] = useState<IHistory[]>([]);
+  const [history, setHistory] = useState<MyHistory[]>([]);
   const [mounted, setMounted] = useState<boolean>(false);
   const [showInput, setShowInput] = useState<boolean>(false);
   const [keyword, setKeyword] = useState<string>('');
@@ -21,14 +23,14 @@ const SearchHeader = () => {
   useClickAway(RootRef, () => closeSearchInput());
   useEffect(() => {
     setMounted(true);
-    setHistory(LOCAL.getSearchHistory());
+    setHistory(HistoryRepository.getSearchHistory());
   }, []);
   const KeydownHandle = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       const keyword = e.currentTarget.value.trim();
       if (keyword) {
-        LOCAL.createNewSearchHistory(keyword);
-        setHistory(LOCAL.getSearchHistory());
+        HistoryRepository.createNewSearchHistory(keyword);
+        setHistory(HistoryRepository.getSearchHistory());
         setKeyword('');
       }
     }
@@ -135,8 +137,8 @@ const SearchHeader = () => {
                 <button
                   className="w-5 flex justify-center"
                   onClick={() => {
-                    LOCAL.deleteSearchHistory(item.id);
-                    setHistory(LOCAL.getSearchHistory());
+                    HistoryRepository.deleteSearchHistory(item.id);
+                    setHistory(HistoryRepository.getSearchHistory());
                   }}
                 >
                   <div className="w-3 h-3">
