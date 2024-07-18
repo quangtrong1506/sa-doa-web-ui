@@ -21,6 +21,7 @@ const Tooltip = ({
         anchor === 'right' ? 'left-[calc(100%_+_12px)] top-1/2 -translate-y-1/2' : '',
         anchor === 'center' ? 'left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2' : '',
         className,
+        'z-[100]',
       )}
     >
       {children}

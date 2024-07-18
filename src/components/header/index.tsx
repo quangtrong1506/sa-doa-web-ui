@@ -30,39 +30,40 @@ const Header = () => {
             {Object.entries(NAV_LINK).map(([key, value]) => (
               <NavItem key={key} href={value.href} title={value.title} icon={value.icon} />
             ))}
-            <NavItem
-              onClick={() => {
-                setShowNav(true);
-              }}
-              className={clsx('block lg:hidden', showNav ? 'hidden' : '')}
-              href={'#'}
-              title={'Open Nav'}
-              icon={<NavBarIcon />}
-            />
-            <NavItem
-              onClick={() => {
-                setShowNav(false);
-              }}
-              className={clsx('block lg:hidden', showNav ? '' : 'hidden')}
-              href={'#'}
-              title={'Close Nav'}
-              icon={<XMarkIcon className="scale-90" />}
-            />
+            <div className="flex-1 h-full mt-2" ref={NavRef}>
+              <NavItem
+                onClick={() => {
+                  setShowNav(true);
+                }}
+                className={clsx('block lg:hidden', showNav ? 'hidden' : '')}
+                href={'#'}
+                title={'Mở menu'}
+                icon={<NavBarIcon />}
+              />
+              <NavItem
+                onClick={() => {
+                  setShowNav(false);
+                }}
+                className={clsx('block lg:hidden', showNav ? '' : 'hidden')}
+                href={'#'}
+                title={'Đóng menu'}
+                icon={<XMarkIcon className="scale-90" />}
+              />
+              <div
+                className={clsx(
+                  'fixed top-[56px] bottom-0 w-96 max-[500px]:w-full bg-white dark:bg-bgContentDark right-0 z-0 shadow-md dark:border-r dark:border-white/10',
+                  'transition-all duration-300 ease-in-out',
+                  showNav ? 'translate-x-0' : 'translate-x-full',
+                )}
+              >
+                <NavHeader></NavHeader>
+              </div>
+            </div>
           </div>
         </div>
         <div className="flex-1 max-w-[360px] h-full lg:block hidden">
           <AuthHeader />
         </div>
-      </div>
-      <div
-        ref={NavRef}
-        className={clsx(
-          'fixed top-[56px] bottom-0 w-96 max-[500px]:w-full bg-white dark:bg-bgContentDark right-0 z-0 shadow-md dark:border-r dark:border-white/10',
-          'transition-all duration-300 ease-in-out',
-          showNav ? 'translate-x-0' : 'translate-x-full',
-        )}
-      >
-        <NavHeader></NavHeader>
       </div>
     </>
   );
