@@ -1,5 +1,4 @@
 'use client';
-import LOCAL, { IHistory } from '@/helpers/local.helper';
 import clsx from 'clsx';
 import { KeyboardEvent, useEffect, useRef, useState } from 'react';
 import { useDebounce } from 'react-use';
@@ -7,22 +6,24 @@ import ArrowLeftLongIcon from '../icons/arrow-left-long.icon';
 import HistoryIcon from '../icons/history.icon';
 import XMarkIcon from '../icons/xmark.icon';
 import Tooltip from '../reuse/tooltip';
+import { MyHistory } from '@/data/datasource/local/model/MyHistory';
+import { HistoryRepository } from '@/data/datasource/local/HistoryRepository';
 
 const BigSearchHeader = ({ closeEvent }: { closeEvent: () => void }) => {
-  const [history, setHistory] = useState<IHistory[]>([]);
+  const [history, setHistory] = useState<MyHistory[]>([]);
   const [mounted, setMounted] = useState<boolean>(false);
   const [keyword, setKeyword] = useState<string>('');
   const InputRef = useRef<HTMLInputElement>(null);
   useEffect(() => {
     setMounted(true);
-    setHistory(LOCAL.getSearchHistory());
+    setHistory(HistoryRepository.getSearchHistory());
   }, []);
   const KeydownHandle = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       const keyword = e.currentTarget.value.trim();
       if (keyword) {
-        LOCAL.createNewSearchHistory(keyword);
-        setHistory(LOCAL.getSearchHistory());
+        HistoryRepository.createNewSearchHistory(keyword);
+        setHistory(HistoryRepository.getSearchHistory());
         setKeyword('');
       }
     }
@@ -89,8 +90,8 @@ const BigSearchHeader = ({ closeEvent }: { closeEvent: () => void }) => {
                 <button
                   className="w-5 flex justify-center"
                   onClick={() => {
-                    LOCAL.deleteSearchHistory(item.id);
-                    setHistory(LOCAL.getSearchHistory());
+                    HistoryRepository.deleteSearchHistory(item.id);
+                    setHistory(HistoryRepository.getSearchHistory());
                   }}
                 >
                   <div className="w-3 h-3">
