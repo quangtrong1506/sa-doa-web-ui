@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import Auth from '@/presentation/components/reuse/auth/auth';
+import Auth from '@/presentation/components/reuse/auth';
 
 class Signup extends React.Component<any, {}> {
 
