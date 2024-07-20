@@ -1,12 +1,14 @@
+import { BuildConfig } from '@/config/config';
 import { Providers } from '@/presentation/provider';
 import type { Metadata } from 'next';
 import './globals.css';
+
 export const metadata: Metadata = {
   title: {
-    default: 'Ốc Sa Đoạ',
+    default: BuildConfig.APP_NAME,
     template: '%s × Ốc Sa Đoạ',
   },
-  description: 'Website chia sẻ tài liệu nghiên cứu khoa học hàng đầu thế giới',
+  description: BuildConfig.APP_DESCRIPTION,
   icons: {
     icon: {
       url: '/images/logo.png',
@@ -16,16 +18,16 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: 'website',
-    description: 'Website chia sẻ tài liệu nghiên cứu khoa học hàng đầu thế giới',
+    description: BuildConfig.APP_DESCRIPTION,
     images: [
       {
         url: '/images/logo.png',
         width: 1200,
         height: 630,
-        alt: 'Logo Ốc Sa Đoạ',
+        alt: 'Logo ' + BuildConfig.APP_NAME,
       },
     ],
-    siteName: 'Ốc Sa Đoạ',
+    siteName: BuildConfig.APP_NAME,
     locale: 'vi_VN',
   },
 };
