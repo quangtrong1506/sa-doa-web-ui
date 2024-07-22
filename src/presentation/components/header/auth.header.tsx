@@ -7,6 +7,7 @@ import { useClickAway } from 'react-use';
 import Tooltip from '../reuse/tooltip';
 import ThemeSwitch from '../theme-mode/theme-switch';
 import NavHeader from './nav.header';
+import { BuildConfig } from '@/config/config';
 
 const AuthHeader = () => {
   const [isShowNav, setIsShowNav] = useState<boolean>(false);
@@ -40,7 +41,7 @@ const AuthHeader = () => {
               className="w-full h-full object-contain"
               width={55}
               height={55}
-              src={'/images/logo.png'}
+              src={BuildConfig.LOGO}
               alt="logo"
             />
           </div>

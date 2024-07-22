@@ -3,32 +3,33 @@ import VideoIcon from '@/presentation/components/icons/video.icon';
 import ImageIcon from '@/presentation/components/icons/image.icon';
 import ModelIcon from '@/presentation/components/icons/model.icon';
 import SavedIcon from '@/presentation/components/icons/saved.icon';
+import { Routes } from '@/presentation/constants/Routes';
 
 
 const NAV_LINK = {
   home: {
     title: 'Trang chủ',
-    href: '/',
+    href: Routes.Home,
     icon: <HomeIcon />,
   },
   videos: {
     title: 'Tất cả video',
-    href: '/videos',
+    href: Routes.Videos,
     icon: <VideoIcon />,
   },
   images: {
     title: 'Tất cả hình ảnh',
-    href: '/images',
+    href: Routes.Images,
     icon: <ImageIcon />,
   },
   models: {
     title: 'Người mẫu',
-    href: '/models',
+    href: Routes.Models,
     icon: <ModelIcon />,
   },
   about: {
     title: 'Đã lưu',
-    href: '/saved',
+    href: Routes.Saved,
     icon: <SavedIcon />,
   },
 };

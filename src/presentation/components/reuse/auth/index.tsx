@@ -2,6 +2,9 @@
 import { BuildConfig } from '@/config/config';
 import Image from 'next/image';
 import React, { FormEvent } from 'react';
+import { Routes } from '@/presentation/constants/Routes';
+import { CustomerRepository } from '@/data/datasource/local/CustomerRepository';
+import { CustomerImpl } from '@/data/datasource/local/model/Customer';
 
 const authStr = {
   signup: {
@@ -69,6 +72,13 @@ class Auth extends React.Component<{ isSignup: boolean }, AuthViewModel> {
     };
   }
 
+  componentDidMount() {
+    const cus = CustomerRepository.getCustomer()
+    if(cus !== undefined) {
+      window.location.href = Routes.Home
+    }
+  }
+
   onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const { isSignup, email, password, repassword, isFailRePassword } = this.state;
@@ -77,9 +87,17 @@ class Auth extends React.Component<{ isSignup: boolean }, AuthViewModel> {
         isFailRePassword: password !== repassword,
       });
     } else {
+      if(email === BuildConfig.USER && password === BuildConfig.PASSWORD) {
+        const cus = new CustomerImpl()
+        cus.email = BuildConfig.USER
+        cus.password = BuildConfig.PASSWORD
+        CustomerRepository.saveCustomer(cus)
+        window.location.href = Routes.Home
+        alert("Đăng nhập thành công")
+      } else {
+        alert("Đăng nhập thất bại")
+      }
     }
-    console.log(this.state);
-    alert(this.state);
   }
 
   render() {

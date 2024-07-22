@@ -14,9 +14,14 @@ const getCustomer = () => {
   return undefined;
 };
 
+const deleteCustomer = () => {
+  localStorage.removeItem(CUSTOMER_KEY)
+};
+
 const CustomerRepository = {
   saveCustomer,
-  getCustomer
+  getCustomer,
+  deleteCustomer,
 }
 
 export {CustomerRepository}

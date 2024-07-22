@@ -6,22 +6,22 @@ import './globals.css';
 export const metadata: Metadata = {
   title: {
     default: BuildConfig.APP_NAME,
-    template: '%s × Ốc Sa Đoạ',
+    template: `%s × ${BuildConfig.APP_NAME}`,
   },
   description: BuildConfig.APP_DESCRIPTION,
   icons: {
     icon: {
-      url: '/images/logo.png',
+      url: BuildConfig.LOGO,
       type: 'image/png',
     },
-    shortcut: { url: '/images/logo.png', type: 'image/png' },
+    shortcut: { url: BuildConfig.LOGO, type: 'image/png' },
   },
   openGraph: {
     type: 'website',
     description: BuildConfig.APP_DESCRIPTION,
     images: [
       {
-        url: '/images/logo.png',
+        url: BuildConfig.LOGO,
         width: 1200,
         height: 630,
         alt: 'Logo ' + BuildConfig.APP_NAME,
