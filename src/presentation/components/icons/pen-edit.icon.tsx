@@ -3,7 +3,9 @@ import clsx from 'clsx';
 const PenEditIcon = ({ className, ...props }: IconProps) => {
   return (
     <svg
-      className={clsx('w-full h-full fill-svgDefault dark:fill-svgDefault_d', className)}
+      width={512}
+      height={512}
+      className={clsx('fill-svgDefault dark:fill-svgDefault_d', className)}
       viewBox="0 0 512 512"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

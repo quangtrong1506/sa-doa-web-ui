@@ -3,7 +3,9 @@ import clsx from 'clsx';
 const SearchIcon = ({ className, ...props }: IconProps) => {
   return (
     <svg
-      className={clsx('w-full h-full fill-svgDefault dark:fill-svgDefault_d', className)}
+      width={14}
+      height={14}
+      className={clsx('fill-svgDefault dark:fill-svgDefault_d', className)}
       viewBox="0 0 14 14"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

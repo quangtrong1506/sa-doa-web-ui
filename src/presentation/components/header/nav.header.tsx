@@ -10,7 +10,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import AdminPageIcon from '../icons/admin-page.icon';
 import CheckIcon from '../icons/check.icon';
-import LogoutIcon from '../icons/logout.ion';
+import LogoutIcon from '../icons/logout.icon';
 import MoonIcon from '../icons/moon.icon';
 import SavedIcon from '../icons/saved.icon';
 import VideoUserIcon from '../icons/view-user.icon';

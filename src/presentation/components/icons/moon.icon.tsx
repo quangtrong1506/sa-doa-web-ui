@@ -5,9 +5,11 @@ type SvgProps = SVGAttributes<HTMLOrSVGElement>;
 function MoonIcon(props: SvgProps) {
   return (
     <svg
+      width={384}
+      height={512}
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 384 512"
-      className={clsx('fill-svgDefault dark:fill-svgDefault_d w-full h-full', props.className)}
+      className={clsx('fill-svgDefault dark:fill-svgDefault_d', props.className)}
       fill="none"
       {...props}
     >
