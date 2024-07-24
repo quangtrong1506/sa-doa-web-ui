@@ -1,4 +1,4 @@
-const getTimeAgo = (timePusher: string) => {
+const getTimeAgo = (timePusher: string = new Date().toISOString()) => {
   const now = new Date();
   const then = new Date(timePusher);
   const seconds = Math.floor((now.getTime() - then.getTime()) / 1000);

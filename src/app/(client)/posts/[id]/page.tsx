@@ -6,22 +6,29 @@ import ArrowPrevIcon from '@/presentation/components/icons/arrow-prev.icon';
 import ExitFullScreenIcon from '@/presentation/components/icons/exit-full-screen.icon';
 import XMarkIcon from '@/presentation/components/icons/xmark.icon';
 import ZoomFullScreenIcon from '@/presentation/components/icons/zoom-full-screen.icon';
+import { IPost } from '@/presentation/components/reuse/post/post';
+import { resetUrlBack } from '@/redux/features/url';
 import { useAppSelector } from '@/redux/store';
 import { clsx } from 'clsx';
 import Image from 'next/image';
 import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Zoom } from 'swiper/modules';
 import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 const PostDetail = () => {
-  const urlReducer = useAppSelector((state) => state.urlReducer);
+  const dispatch = useDispatch();
   const router = useRouter();
   const params = useParams();
   const searchParams = useSearchParams();
   const photo = searchParams.get('p');
+
+  const urlReducer = useAppSelector((state) => state.urlReducer);
+  const postReducer = useAppSelector((state) => state.postReducer);
   const [mounted, setMounted] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isFullScreen, setIsFullScreen] = useState(false);
+  const [post, setPost] = useState<IPost | undefined>(undefined);
   const SwiperRef = useRef<SwiperRef | null>(null);
   const id = params.id;
   const handleNextClick = () => {
@@ -33,11 +40,16 @@ const PostDetail = () => {
   const handleCloseClick = () => {
     if (urlReducer.url?.back) router.back();
     else router.push('/', { scroll: false });
+    dispatch(resetUrlBack());
   };
-
+  useEffect(() => {
+    if (!postReducer.isLoading && postReducer.post) setPost(postReducer.post);
+  }, [postReducer]);
   useEffect(() => {
     setMounted(true);
   }, []);
+  console.log(post);
+
   if (!mounted) return null;
   return (
     <div className={clsx('w-full h-[calc(100vh_-_55px)]', isLoading ? 'hidden' : 'flex')}>

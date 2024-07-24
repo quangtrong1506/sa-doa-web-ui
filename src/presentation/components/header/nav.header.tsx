@@ -1,7 +1,7 @@
 'use client';
 
 import { BuildConfig } from '@/config/config';
-import { UserRole } from '@/data/datasource/redux/model/ReduxUser';
+import UserRole from '@/data/datasource/constants/role.constant';
 import { useAppSelector } from '@/redux/store';
 import clsx from 'clsx';
 import { useTheme } from 'next-themes';

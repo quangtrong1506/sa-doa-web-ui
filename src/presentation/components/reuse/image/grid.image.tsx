@@ -1,20 +1,22 @@
 'use client';
 
+import { setPost } from '@/redux/features/post';
 import { setUrlBack } from '@/redux/features/url';
 import clsx from 'clsx';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { IPost } from '../post/post';
 
 interface GProps {
-  id: string;
+  post?: IPost;
   images: string[];
 }
 interface IProps extends GProps {
   onclick?: (postId: string, index: number) => void;
 }
-const Image12 = ({ images, id, onclick }: IProps) => {
+const Image12 = ({ images, post, onclick }: IProps) => {
   return (
     <div className="flex w-full">
       {images.map((image) => (
@@ -22,7 +24,7 @@ const Image12 = ({ images, id, onclick }: IProps) => {
           className="flex-1 aspect-square overflow-hidden"
           key={image}
           onClick={() => {
-            onclick && onclick(id, images.indexOf(image));
+            onclick && onclick(post?.id || '', images.indexOf(image));
           }}
         >
           <Image
@@ -37,14 +39,14 @@ const Image12 = ({ images, id, onclick }: IProps) => {
     </div>
   );
 };
-const Image3 = ({ images, id, onclick }: IProps) => {
+const Image3 = ({ images, post, onclick }: IProps) => {
   return (
     <div className="w-full flex">
       <div className="w-2/3">
         <div
           className="w-full aspect-square overflow-hidden flex justify-center items-center"
           onClick={() => {
-            onclick && onclick(id, 0);
+            onclick && onclick(post?.id || '', 0);
           }}
         >
           <Image
@@ -60,7 +62,7 @@ const Image3 = ({ images, id, onclick }: IProps) => {
         <div
           className="w-full h-[calc(50%_-_2px)] flex items-center justify-center overflow-hidden aspect-square "
           onClick={() => {
-            onclick && onclick(id, 1);
+            onclick && onclick(post?.id || '', 1);
           }}
         >
           <Image
@@ -74,7 +76,7 @@ const Image3 = ({ images, id, onclick }: IProps) => {
         <div
           className="w-full h-[calc(50%_-_2px)] flex items-center justify-center overflow-hidden aspect-square "
           onClick={() => {
-            onclick && onclick(id, 2);
+            onclick && onclick(post?.id || '', 2);
           }}
         >
           <Image
@@ -90,7 +92,7 @@ const Image3 = ({ images, id, onclick }: IProps) => {
   );
 };
 
-const Image4More = ({ images, id, onclick }: IProps) => {
+const Image4More = ({ images, post, onclick }: IProps) => {
   const imageSlice = images.slice(0, images.length > 5 ? 5 : images.length);
   const [isShowImageMore, setIsShowImageMore] = useState(false);
   return (
@@ -105,7 +107,7 @@ const Image4More = ({ images, id, onclick }: IProps) => {
             index > 1 && images.length > 4 ? 'w-[calc(100%_/_3_-_2.667px)]' : '',
           )}
           onClick={() => {
-            onclick && onclick(id, images.indexOf(image));
+            onclick && onclick(post?.id || '', images.indexOf(image));
           }}
         >
           <Image
@@ -132,14 +134,15 @@ const Image4More = ({ images, id, onclick }: IProps) => {
     </div>
   );
 };
-const GridImage = ({ images, id }: GProps) => {
+const GridImage = ({ images, post }: GProps) => {
   const [mounted, setMounted] = useState<boolean>(false);
   const router = useRouter();
   const dispatch = useDispatch();
   const handleClickImage = (postId: string, index: number) => {
     const url = (window.location.pathname || '/') + (window.location.search || '');
     dispatch(setUrlBack(url));
-    router.push(`/posts/${id}?p=${index}`);
+    dispatch(setPost(post));
+    router.push(`/posts/${post?.id || 'dev'}?p=${index}`);
   };
   useEffect(() => {
     setMounted(true);
@@ -147,9 +150,9 @@ const GridImage = ({ images, id }: GProps) => {
   if (!mounted) return null;
   return (
     <div className="w-full gap-1 flex flex-wrap">
-      {images.length < 3 && <Image12 id={id} images={images} onclick={handleClickImage} />}
-      {images.length == 3 && <Image3 id={id} images={images} onclick={handleClickImage} />}
-      {images.length > 3 && <Image4More id={id} images={images} onclick={handleClickImage} />}
+      {images.length < 3 && <Image12 post={post} images={images} onclick={handleClickImage} />}
+      {images.length == 3 && <Image3 post={post} images={images} onclick={handleClickImage} />}
+      {images.length > 3 && <Image4More post={post} images={images} onclick={handleClickImage} />}
     </div>
   );
 };

@@ -1,6 +1,6 @@
 'use client';
-import { IUser } from '@/data/datasource/redux/model/ReduxUser';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { IUser } from './user';
 
 interface UserState {
   isLoading: boolean;

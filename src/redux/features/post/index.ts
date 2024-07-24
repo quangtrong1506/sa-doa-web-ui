@@ -1,29 +1,31 @@
 'use client';
-import { IUser } from '@/data/datasource/redux/model/ReduxUser';
+
+import { IPost } from '@/presentation/components/reuse/post/post';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-interface UserState {
+interface InitStateProps {
   isLoading: boolean;
-  user?: IUser;
+  post?: IPost;
 }
 
-const initialState: UserState = {
+const initialState: InitStateProps = {
   isLoading: true,
-  user: undefined,
+  post: undefined,
 };
 
 export const userSlice = createSlice({
   name: 'post',
   initialState,
   reducers: {
-    setUser: (_state, action: PayloadAction<UserState>) => {
+    setPost: (_state, action: PayloadAction<IPost | undefined>) => {
       return {
         isLoading: false,
-        user: action.payload?.user,
+        post: action.payload,
       };
     },
+    resetPost: () => initialState,
   },
 });
 
 export default userSlice.reducer;
-export const { setUser } = userSlice.actions;
+export const { setPost, resetPost } = userSlice.actions;

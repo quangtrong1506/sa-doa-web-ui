@@ -4,15 +4,22 @@ import TimerHandler from '@/helpers/time.helper';
 import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import GridImage from '../image/grid.image';
 import MorePostComponent from './more.post';
+import { IPost } from './post';
 
 interface IPostItemProps {
   className: string;
-  item: any;
+  post?: IPost;
 }
 
-const PostItem = ({ className }: IPostItemProps) => {
+const PostItem = ({ className, post }: IPostItemProps) => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  useEffect(() => {
+    setIsLoading(!!post);
+  }, [post]);
+
   return (
     <div
       className={clsx('w-full bg-white rounded-lg shadow-sm dark:bg-bgContent_d p-6', className)}
@@ -23,8 +30,8 @@ const PostItem = ({ className }: IPostItemProps) => {
             className="w-full h-full object-cover"
             width={50}
             height={50}
-            src={BuildConfig.DEFAULT_USER_AVATAR}
-            alt="..."
+            src={post?.user?.avatar || BuildConfig.DEFAULT_USER_AVATAR}
+            alt={post?.user?.avatar || BuildConfig.DEFAULT_USER_AVATAR}
           />
         </div>
         <div className="flex-1">
@@ -32,13 +39,13 @@ const PostItem = ({ className }: IPostItemProps) => {
             <span>
               <Link
                 className="font-semibold hover:underline text-textLink_l dark:text-textLink_d"
-                href={'/user/1'}
+                href={'/users/' + post?.user?.id}
               >
-                Trọng Sa Đoạ
+                {post?.user?.name || BuildConfig.DEFAULT_USER_NAME}
               </Link>
             </span>
             <span className="w-full inline-block text-[12px] text-textDisable_l dark:text-textDisable_d">
-              {TimerHandler.getTimeAgo('2024-06-11')}
+              {TimerHandler.getTimeAgo(post?.updated_ad)}
             </span>
           </div>
         </div>
@@ -49,19 +56,20 @@ const PostItem = ({ className }: IPostItemProps) => {
       <div className="h-[1px] w-full border-b border-bgHover_l dark:border-bgHover_d/5 mt-2 mb-3 hidden"></div>
       <div className="mt-3">
         <div
+          className="text-base xl:text-lg"
           dangerouslySetInnerHTML={{
-            __html: 'Hôm qua tớ đi sự kiện nè',
+            __html: post?.body || '',
           }}
         ></div>
-        <div className="text-sm">
-          <div>
+        <div className="text-sm xl:text-base">
+          <div className={post?.cosplayer ? '' : 'hidden'}>
             <span className="font-semibold">Cosplayer: </span>
             <Link className="text-textLink_l hover:underline" href={'/models/id'}>
               Rinaijiao-(日奈娇)
             </Link>
           </div>
-          <div>
-            <span className="font-semibold">Character: </span>: Umi-kun Girl
+          <div className={post?.character ? '' : 'hidden'}>
+            <span className="font-semibold">Character: </span>Umi-kun Girl
           </div>
           <div className="flex flex-wrap gap-1">
             {Array.from({ length: 4 }).map((_, index) => (
@@ -74,7 +82,7 @@ const PostItem = ({ className }: IPostItemProps) => {
             ))}
           </div>
           <div className="mt-2">
-            <GridImage id="id" images={POST_IMAGES}></GridImage>
+            <GridImage post={post} images={POST_IMAGES}></GridImage>
           </div>
         </div>
       </div>

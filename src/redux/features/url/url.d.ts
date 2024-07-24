@@ -1,5 +1,6 @@
 interface IUrl {
-  back: string;
+  back?: string;
+  redirect?: string;
 }
 
 export type { IUrl };

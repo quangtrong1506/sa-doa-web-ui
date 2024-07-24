@@ -12,14 +12,7 @@ const UserRole = {
     label: 'Cộng tác viên',
   },
 };
-interface IUser {
-  id: string;
-  name: string;
-  email: string;
-  password: string;
-  role: keyof typeof UserRole;
-  avatar?: string;
-}
+type IUserRole = keyof typeof UserRole;
 
-export { UserRole };
-export type { IUser };
+export default UserRole;
+export type { IUserRole };
