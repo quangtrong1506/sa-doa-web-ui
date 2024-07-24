@@ -28,6 +28,8 @@ const NavOpenDown = ({ className, itemClassName, label, icon, items, ...props }:
       </div>
       <span className="w-5 h-5 absolute right-0 top-1" onClick={() => setShow(!show)}>
         <ArrowDownIcon
+          width={20}
+          height={20}
           className={clsx('transition-all duration-200 ease-in-out', show ? 'rotate-180' : '')}
         />
       </span>

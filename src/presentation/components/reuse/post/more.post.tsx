@@ -31,7 +31,7 @@ const MorePostComponent = ({ className, user, post }: IMorePostProps) => {
         }}
       >
         <div className="w-4 h-4">
-          <MoreIcon />
+          <MoreIcon width={16} height={16} />
         </div>
       </button>
       <div
@@ -45,7 +45,7 @@ const MorePostComponent = ({ className, user, post }: IMorePostProps) => {
           <li className="text-[12px] hover:bg-bgHover_l dark:hover:bg-bgHover_d rounded px-2 py-1 cursor-pointer">
             <Link className="flex items-center" href={'/admin/posts/aaaa'}>
               <span className="inline-block w-3 h-3 mr-2">
-                <PenEditIcon />
+                <PenEditIcon width={12} height={12} />
               </span>
               Chỉnh sửa bài viết
             </Link>
@@ -53,7 +53,7 @@ const MorePostComponent = ({ className, user, post }: IMorePostProps) => {
           <li className="text-[12px] hover:bg-bgHover_l dark:hover:bg-bgHover_d rounded px-2 py-1 cursor-pointer">
             <button className="flex items-center">
               <span className="inline-block w-3 mr-2">
-                <SavedIcon />
+                <SavedIcon width={12} height={12} />
               </span>
               Lưu bài viết
             </button>
@@ -61,7 +61,7 @@ const MorePostComponent = ({ className, user, post }: IMorePostProps) => {
           <li className="text-[12px] hover:bg-bgHover_l dark:hover:bg-bgHover_d rounded px-2 py-1 cursor-pointer">
             <button className="flex items-center">
               <span className="inline-block w-3 mr-2">
-                <DeleteIcon />
+                <DeleteIcon width={12} height={12} />
               </span>
               Xoá bài viết
             </button>
@@ -69,7 +69,7 @@ const MorePostComponent = ({ className, user, post }: IMorePostProps) => {
           <li className="text-[12px] hover:bg-bgHover_l dark:hover:bg-bgHover_d rounded px-2 py-1 cursor-pointer">
             <button className="flex items-center">
               <span className="inline-block w-3 mr-2">
-                <ReportIcon />
+                <ReportIcon width={12} height={12} />
               </span>
               Báo cáo bài viết
             </button>

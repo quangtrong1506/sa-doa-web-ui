@@ -56,7 +56,7 @@ const BigSearchHeader = ({ closeEvent }: { closeEvent: () => void }) => {
                 }}
                 className="w-5 h-5"
               >
-                <ArrowLeftLongIcon />
+                <ArrowLeftLongIcon width={20} height={20} />
               </button>
             </div>
           </div>
@@ -84,8 +84,8 @@ const BigSearchHeader = ({ closeEvent }: { closeEvent: () => void }) => {
                 key={item.id}
                 className="flex justify-between items-center hover:bg-bgHover_l dark:hover:bg-bgHover_d p-2 ps-4 rounded-md cursor-default"
               >
-                <span className="w-4 h-4 -mb-1">
-                  <HistoryIcon />
+                <span className="w-4 h-4">
+                  <HistoryIcon width={16} height={16} />
                 </span>
                 <span data-tooltip className="flex-1 ms-6 relative">
                   <span className="line-clamp-1">{item.keyword}</span>

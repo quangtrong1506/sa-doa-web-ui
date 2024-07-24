@@ -15,17 +15,14 @@ import { Zoom } from 'swiper/modules';
 import { Swiper, SwiperRef, SwiperSlide } from 'swiper/react';
 const PostDetail = () => {
   const urlReducer = useAppSelector((state) => state.urlReducer);
-
   const router = useRouter();
   const params = useParams();
-
   const searchParams = useSearchParams();
   const photo = searchParams.get('p');
   const [mounted, setMounted] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [isFullScreen, setIsFullScreen] = useState(false);
   const SwiperRef = useRef<SwiperRef | null>(null);
-  console.log(photo);
   const id = params.id;
   const handleNextClick = () => {
     if (SwiperRef.current) SwiperRef.current.swiper.slideNext();
@@ -98,7 +95,7 @@ const PostDetail = () => {
             onClick={handleCloseClick}
             className="absolute top-3 left-3 z-10 w-10 h-10 p-3 rounded-full flex justify-center items-center hover:bg-white/20"
           >
-            <XMarkIcon className="fill-white" />
+            <XMarkIcon width={40} height={40} className="fill-white" />
           </button>
           <button
             onClick={() => {

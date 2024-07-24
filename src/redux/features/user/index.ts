@@ -6,9 +6,17 @@ interface UserState {
   isLoading: boolean;
   user?: IUser;
 }
-
+const userState: IUser = {
+  id: 'id-1',
+  email: 'quangtrong.admin@gmail.com',
+  name: 'Trọng Sa Đoạ',
+  password: '123456',
+  role: 'admin',
+  avatar: '/images/gif/17.gif',
+};
+// user: undefined
 const initialState: UserState = {
-  isLoading: true,
+  isLoading: false,
   user: undefined,
 };
 

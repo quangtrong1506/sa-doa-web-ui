@@ -32,7 +32,7 @@ const NavHeader = () => {
       className=" cursor-pointer rounded-md flex gap-3 justify-start items-center w-full h-full transition-none duration-0"
     >
       <div className={'w-4 h-4'}>
-        <CheckIcon className={theme == 'light' ? '' : 'hidden'} />
+        <CheckIcon width={16} height={16} className={theme == 'light' ? '' : 'hidden'} />
       </div>
       <span className="ms-2 transition-none duration-0 text-black dark:text-white">
         Chế độ sáng
@@ -46,7 +46,7 @@ const NavHeader = () => {
       }}
     >
       <div className={'w-4 h-4'}>
-        <CheckIcon className={theme == 'dark' ? '' : 'hidden'} />
+        <CheckIcon width={16} height={16} className={theme == 'dark' ? '' : 'hidden'} />
       </div>
       <span className="ms-2 transition-none duration-0 text-black dark:text-white">Chế độ tối</span>
     </span>,
@@ -58,7 +58,7 @@ const NavHeader = () => {
       }}
     >
       <div className={'w-4 h-4'}>
-        <CheckIcon className={theme == 'system' ? '' : 'hidden'} />
+        <CheckIcon width={16} height={16} className={theme == 'system' ? '' : 'hidden'} />
       </div>
       <span className="ms-2 transition-none duration-0 text-black dark:text-white">Hệ thống</span>
     </span>,
@@ -105,19 +105,23 @@ const NavHeader = () => {
             )}
           >
             <span className="w-6 h-6 inline-block">
-              <VideoUserIcon />
+              <VideoUserIcon width={24} height={24} />
             </span>
             <span className="font-medium text-black dark:text-white">Xem tất cả trang cá nhân</span>
           </Link>
           <button className="p-3 dark:hover:bg-bgHover_d hover:bg-bgBody_l rounded-xl w-full">
-            <NavOpenDown items={listThemeMode} label="Chế độ tối" icon={<MoonIcon />} />
+            <NavOpenDown
+              items={listThemeMode}
+              label="Chế độ tối"
+              icon={<MoonIcon width={24} height={24} />}
+            />
           </button>
           <Link
             href={'/saved'}
             className="flex gap-7 p-3 items-center cursor-pointer dark:hover:bg-bgHover_d hover:bg-bgBody_l rounded-xl w-full"
           >
             <span className="w-6 h-6 inline-block">
-              <SavedIcon />
+              <SavedIcon width={24} height={24} />
             </span>
             <span className="font-medium text-black dark:text-white">Nội dung đã lưu</span>
           </Link>
@@ -133,7 +137,7 @@ const NavHeader = () => {
             )}
           >
             <span className="w-6 h-6 inline-block">
-              <AdminPageIcon />
+              <AdminPageIcon width={24} height={24} />
             </span>
             <span className="font-medium text-black dark:text-white">Admin page</span>
           </Link>

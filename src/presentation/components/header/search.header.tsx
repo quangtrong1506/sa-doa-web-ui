@@ -69,7 +69,7 @@ const SearchHeader = () => {
                   }}
                   className="w-4 h-4"
                 >
-                  <ArrowLeftLongIcon />
+                  <ArrowLeftLongIcon width={16} height={16} />
                 </button>
               ) : (
                 <Image
@@ -112,7 +112,7 @@ const SearchHeader = () => {
                 }}
               >
                 <div className="w-6 h-6">
-                  <SearchIcon />
+                  <SearchIcon width={24} height={24} />
                 </div>
               </div>
             </div>
@@ -131,7 +131,7 @@ const SearchHeader = () => {
                 className="flex justify-between items-center hover:bg-bgHover_l dark:hover:bg-bgHover_d p-2 ps-6 rounded-md cursor-default"
               >
                 <span className="w-4 h-4 -mb-1">
-                  <HistoryIcon />
+                  <HistoryIcon width={16} height={16} />
                 </span>
                 <span data-tooltip className="flex-1 ms-6 relative">
                   <span className="line-clamp-1">{item.keyword}</span>

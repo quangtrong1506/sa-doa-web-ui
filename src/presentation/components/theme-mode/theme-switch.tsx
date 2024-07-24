@@ -28,7 +28,11 @@ const ThemeSwitch = () => {
       className="w-9 h-9 p-1 flex items-center justify-center rounded-full bg-bgHover_l dark:bg-bgHover_d relative cursor-pointer"
     >
       <div data-tooltip className={clsx('w-6 h-6 relative')}>
-        {resolvedTheme === 'dark' ? <SunIcon /> : <MoonIcon />}
+        {resolvedTheme === 'dark' ? (
+          <SunIcon width={24} height={24} />
+        ) : (
+          <MoonIcon width={24} height={24} />
+        )}
         <Tooltip anchor="bottom">
           {resolvedTheme === 'light' ? 'Chế độ sáng' : 'Chế độ tối'}
         </Tooltip>
@@ -50,7 +54,7 @@ const ThemeSwitch = () => {
             className="py-1 px-3 cursor-pointer hover:bg-bgHover_l rounded-md flex justify-start items-center"
           >
             <div className={'w-4 h-4'}>
-              <CheckIcon className={theme == 'light' ? '' : 'hidden'} />
+              <CheckIcon width={16} height={16} className={theme == 'light' ? '' : 'hidden'} />
             </div>
             <span className="ms-2">Chế độ sáng</span>
           </li>
@@ -61,7 +65,7 @@ const ThemeSwitch = () => {
             }}
           >
             <div className={'w-4 h-4'}>
-              <CheckIcon className={theme == 'dark' ? '' : 'hidden'} />
+              <CheckIcon width={16} height={16} className={theme == 'dark' ? '' : 'hidden'} />
             </div>
             <span className="ms-2">Chế độ tối</span>
           </li>
@@ -72,7 +76,7 @@ const ThemeSwitch = () => {
             }}
           >
             <div className={'w-4 h-4'}>
-              <CheckIcon className={theme == 'system' ? '' : 'hidden'} />
+              <CheckIcon width={16} height={16} className={theme == 'system' ? '' : 'hidden'} />
             </div>
             <span className="ms-2">Hệ thống</span>
           </li>
