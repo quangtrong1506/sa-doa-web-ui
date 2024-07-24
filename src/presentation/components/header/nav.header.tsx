@@ -8,7 +8,7 @@ import { useTheme } from 'next-themes';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import AdminPage from '../icons/admin-page.icon';
+import AdminPageIcon from '../icons/admin-page.icon';
 import CheckIcon from '../icons/check.icon';
 import LogoutIcon from '../icons/logout.ion';
 import MoonIcon from '../icons/moon.icon';
@@ -133,7 +133,7 @@ const NavHeader = () => {
             )}
           >
             <span className="w-6 h-6 inline-block">
-              <AdminPage />
+              <AdminPageIcon />
             </span>
             <span className="font-medium text-black dark:text-white">Admin page</span>
           </Link>

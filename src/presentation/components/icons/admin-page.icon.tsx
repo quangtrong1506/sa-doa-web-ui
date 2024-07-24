@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 
-const AdminPage = ({ className, ...props }: IconProps) => {
+const AdminPageIcon = ({ className, ...props }: IconProps) => {
   return (
     <svg
       className={clsx('w-full h-full fill-svgDefault dark:fill-svgDefault_d', className)}
@@ -16,4 +16,4 @@ const AdminPage = ({ className, ...props }: IconProps) => {
     </svg>
   );
 };
-export default AdminPage;
+export default AdminPageIcon;
