@@ -25,9 +25,6 @@ const ThemeSwitch = () => {
       onClick={() => {
         setFocus(true);
       }}
-      onMouseLeave={() => {
-        setFocus(false);
-      }}
       className="w-9 h-9 p-1 flex items-center justify-center rounded-full bg-bgHover_l dark:bg-bgHover_d relative cursor-pointer"
     >
       <div data-tooltip className={clsx('w-6 h-6 relative')}>
@@ -38,9 +35,12 @@ const ThemeSwitch = () => {
       </div>
       <div
         className={clsx(
-          'absolute min-w-40 top-full bg-white dark:bg-bgContentDark py-3 px-1 shadow-md rounded-md border-t border-black/5 dark:border-white/5',
+          'absolute min-w-40 top-full bg-white dark:bg-bgContent_d py-3 px-1 shadow-md rounded-md border-t border-black/5 dark:border-white/5',
           focus ? '' : 'hidden',
         )}
+        onMouseLeave={() => {
+          setFocus(false);
+        }}
       >
         <ul className="text-left">
           <li

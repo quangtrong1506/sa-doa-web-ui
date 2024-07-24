@@ -1,18 +1,20 @@
 'use client';
+import { HistoryRepository } from '@/data/datasource/local/HistoryRepository';
+import { MyHistory } from '@/data/datasource/local/model/MyHistory';
 import clsx from 'clsx';
+import { useRouter } from 'next/navigation';
 import { KeyboardEvent, useEffect, useRef, useState } from 'react';
 import { useDebounce } from 'react-use';
 import ArrowLeftLongIcon from '../icons/arrow-left-long.icon';
 import HistoryIcon from '../icons/history.icon';
 import XMarkIcon from '../icons/xmark.icon';
 import Tooltip from '../reuse/tooltip';
-import { MyHistory } from '@/data/datasource/local/model/MyHistory';
-import { HistoryRepository } from '@/data/datasource/local/HistoryRepository';
 
 const BigSearchHeader = ({ closeEvent }: { closeEvent: () => void }) => {
   const [history, setHistory] = useState<MyHistory[]>([]);
   const [mounted, setMounted] = useState<boolean>(false);
   const [keyword, setKeyword] = useState<string>('');
+  const router = useRouter();
   const InputRef = useRef<HTMLInputElement>(null);
   useEffect(() => {
     setMounted(true);
@@ -25,6 +27,8 @@ const BigSearchHeader = ({ closeEvent }: { closeEvent: () => void }) => {
         HistoryRepository.createNewSearchHistory(keyword);
         setHistory(HistoryRepository.getSearchHistory());
         setKeyword('');
+        router.push(`/search?q=${keyword}`);
+        closeEvent();
       }
     }
   };
@@ -61,7 +65,7 @@ const BigSearchHeader = ({ closeEvent }: { closeEvent: () => void }) => {
               id="big-search-input"
               ref={InputRef}
               className={clsx(
-                'focus:outline-none bg-bgInputLight dark:bg-bgInputDark py-2 px-3 w-full rounded-full ',
+                'focus:outline-none bg-bgInput_l dark:bg-bgInput_d py-2 px-3 w-full rounded-full ',
                 'inline-block',
               )}
               type="text"
@@ -73,7 +77,7 @@ const BigSearchHeader = ({ closeEvent }: { closeEvent: () => void }) => {
             />
           </div>
         </div>
-        <div className={clsx('bg-white w-full pb-3 rounded-b-md dark:bg-bgContentDark')}>
+        <div className={clsx('bg-white w-full pb-3 rounded-b-md dark:bg-bgContent_d')}>
           <ul className={clsx('pt-3 mx-1', history.length > 0 ? '' : 'hidden')}>
             {history.map((item) => (
               <li

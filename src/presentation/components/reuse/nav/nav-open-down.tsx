@@ -1,8 +1,7 @@
+import ArrowDownIcon from '@/presentation/components/icons/arrow-down.icon';
 import clsx from 'clsx';
 import React, { useRef, useState } from 'react';
 import { useClickAway } from 'react-use';
-import ArrowDownIcon from '@/presentation/components/icons/arrow-down.icon';
-
 
 type Props = {
   itemClassName?: string;
@@ -43,7 +42,7 @@ const NavOpenDown = ({ className, itemClassName, label, icon, items, ...props }:
         <ul className="flex flex-col gap-2 mt-5 transition-none duration-0">
           {items.map((item, index) => (
             <li
-              className="w-full flex justify-start items-center ps-8 py-2 rounded-md h-12 dark:hover:bg-bgContentDark hover:bg-main/10 transition-none duration-0"
+              className="w-full flex justify-start items-center ps-8 py-2 rounded-md h-12 dark:hover:bg-bgContent_d hover:bg-main/10 transition-none duration-0"
               key={index}
             >
               {item}

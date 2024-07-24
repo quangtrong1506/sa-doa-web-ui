@@ -1,7 +1,10 @@
 'use client';
 
+import { HistoryRepository } from '@/data/datasource/local/HistoryRepository';
+import { MyHistory } from '@/data/datasource/local/model/MyHistory';
 import clsx from 'clsx';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { KeyboardEvent, useEffect, useRef, useState } from 'react';
 import { useClickAway, useDebounce } from 'react-use';
 import ArrowLeftLongIcon from '../icons/arrow-left-long.icon';
@@ -9,8 +12,6 @@ import HistoryIcon from '../icons/history.icon';
 import SearchIcon from '../icons/search.icon';
 import XMarkIcon from '../icons/xmark.icon';
 import Tooltip from '../reuse/tooltip';
-import { MyHistory } from '@/data/datasource/local/model/MyHistory';
-import { HistoryRepository } from '@/data/datasource/local/HistoryRepository';
 
 const SearchHeader = () => {
   const [focus, setFocus] = useState<boolean>(false);
@@ -18,6 +19,7 @@ const SearchHeader = () => {
   const [mounted, setMounted] = useState<boolean>(false);
   const [showInput, setShowInput] = useState<boolean>(false);
   const [keyword, setKeyword] = useState<string>('');
+  const router = useRouter();
   const RootRef = useRef<HTMLDivElement>(null);
   const InputRef = useRef<HTMLInputElement>(null);
   useClickAway(RootRef, () => closeSearchInput());
@@ -32,6 +34,7 @@ const SearchHeader = () => {
         HistoryRepository.createNewSearchHistory(keyword);
         setHistory(HistoryRepository.getSearchHistory());
         setKeyword('');
+        router.push(`/search?q=${keyword}`);
       }
     }
   };
@@ -83,7 +86,7 @@ const SearchHeader = () => {
             <input
               ref={InputRef}
               className={clsx(
-                'focus:outline-none bg-bgInputLight dark:bg-bgInputDark py-2 px-3 w-full rounded-full ',
+                'focus:outline-none bg-bgInput_l dark:bg-bgInput_d py-2 px-3 w-full rounded-full ',
                 showInput ? 'inline-block' : 'hidden xl:inline-block',
               )}
               type="text"
@@ -117,7 +120,7 @@ const SearchHeader = () => {
         </div>
         <div
           className={clsx(
-            'bg-white w-full pb-3 rounded-b-md dark:bg-bgContentDark',
+            'bg-white w-full pb-3 rounded-b-md dark:bg-bgContent_d',
             focus ? '' : 'hidden',
           )}
         >

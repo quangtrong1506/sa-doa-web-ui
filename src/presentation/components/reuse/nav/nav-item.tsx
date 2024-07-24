@@ -18,15 +18,15 @@ const NavItem = ({
   onClick?: () => void;
 }) => {
   const [active, setActive] = useState(false);
-  const [loading, setLoading] = useState(true);
   const pathname = usePathname();
-  useEffect(() => {
-    setLoading(false);
-  }, []);
+  const [mounted, setMounted] = useState<boolean>(false);
   useEffect(() => {
     setActive(pathname === href);
   }, [pathname, href]);
-
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+  if (!mounted) return null;
   return (
     <Link
       data-active={active}
@@ -36,7 +36,6 @@ const NavItem = ({
         'hover:bg-bgHover_l dark:hover:bg-bgHover_d data-[active=true]:hover:bg-transparent dark:data-[active=true]:hover:bg-transparent',
         '[&_.dash-active]:data-[active=true]:block [&>svg]:data-[active=true]:fill-main',
         '[&>svg]:!w-[25px] [&>svg]:!h-[25px]',
-        loading ? 'hidden' : '',
         className,
       )}
       href={href}

@@ -17,6 +17,9 @@
 }
 
 @layer utilities {
+  body {
+    @apply bg-bgBody_l dark:bg-bgBody_d;
+  }
   [data-tooltip]:hover .tool-tip {
     display: block;
   }
