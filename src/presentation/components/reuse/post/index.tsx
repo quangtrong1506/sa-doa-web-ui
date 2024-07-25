@@ -1,6 +1,5 @@
 import { BuildConfig } from '@/config/config';
 import { POST_IMAGES } from '@/data/datasource/constants/sample.constant';
-import TimerHandler from '@/helpers/time.helper';
 import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -16,18 +15,31 @@ interface IPostItemProps {
 
 const PostItem = ({ className, post }: IPostItemProps) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [mounted, setMounted] = useState<boolean>(false);
   useEffect(() => {
-    setIsLoading(!!post);
+    if (!post) setIsLoading(true);
   }, [post]);
-
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+  if (!mounted) return null;
   return (
     <div
-      className={clsx('w-full bg-white rounded-lg shadow-sm dark:bg-bgContent_d p-6', className)}
+      className={clsx(
+        'w-full bg-white rounded-lg shadow-sm dark:bg-bgContent_d p-6',
+        className,
+        isLoading ? 'select-none' : '',
+      )}
     >
       <div className="flex">
-        <div className="w-10 h-10 rounded-full overflow-hidden flex justify-center items-center mr-2 border border-bgBody_l dark:border-white/15">
+        <div
+          className={clsx(
+            'w-10 h-10 rounded-full overflow-hidden flex justify-center items-center mr-2 border border-bgBody_l dark:border-white/15',
+            isLoading ? 'bg-bgPulse_l dark:bg-bgPulse_d animate-pulse' : '',
+          )}
+        >
           <Image
-            className="w-full h-full object-cover"
+            className={clsx('w-full h-full object-cover', isLoading ? 'hidden' : '')}
             width={50}
             height={50}
             src={post?.user?.avatar || BuildConfig.DEFAULT_USER_AVATAR}
@@ -36,25 +48,56 @@ const PostItem = ({ className, post }: IPostItemProps) => {
         </div>
         <div className="flex-1">
           <div className="w-full -mt-1 flex flex-col">
-            <span>
+            <span
+              className={clsx(
+                isLoading
+                  ? 'inline-block w-40 bg-bgPulse_l dark:bg-bgPulse_d animate-pulse rounded-lg'
+                  : '',
+              )}
+            >
               <Link
-                className="font-semibold hover:underline text-textLink_l dark:text-textLink_d"
+                className={clsx(
+                  'font-semibold hover:underline text-textLink_l dark:text-textLink_d ',
+                  isLoading ? 'hidden' : '',
+                )}
                 href={'/users/' + post?.user?.id}
               >
                 {post?.user?.name || BuildConfig.DEFAULT_USER_NAME}
               </Link>
+              <span className={clsx('font-semibold text-transparent ', isLoading ? '' : 'hidden')}>
+                -
+              </span>
             </span>
-            <span className="w-full inline-block text-[12px] text-textDisable_l dark:text-textDisable_d">
-              {TimerHandler.getTimeAgo(post?.updated_ad)}
+            <span
+              className={clsx(
+                ' inline-block text-[12px]  rounded-lg',
+                isLoading
+                  ? 'text-transparent bg-bgPulse_l dark:bg-bgPulse_d animate-pulse w-12 mt-1 h-3'
+                  : 'w-full text-textDisable_l dark:text-textDisable_d',
+              )}
+            >
+              spa
             </span>
           </div>
         </div>
-        <div>
+        <div className={clsx(isLoading ? 'hidden' : '')}>
           <MorePostComponent />
         </div>
       </div>
       <div className="h-[1px] w-full border-b border-bgHover_l dark:border-bgHover_d/5 mt-2 mb-3 hidden"></div>
-      <div className="mt-3">
+      <div className="mt-3 flex flex-col gap-2">
+        <div className="w-3/5 h-4 bg-bgPulse_l dark:bg-bgPulse_d animate-pulse rounded-lg"></div>
+        <div className="flex gap-2">
+          <div className="w-1/5 h-4 bg-bgPulse_l dark:bg-bgPulse_d animate-pulse rounded-lg"></div>
+          <div className="w-2/3 h-4 bg-bgPulse_l dark:bg-bgPulse_d animate-pulse rounded-lg"></div>
+        </div>
+        <div className="w-2/5 h-4 bg-bgPulse_l dark:bg-bgPulse_d animate-pulse rounded-lg"></div>
+        <div className="flex gap-2">
+          <div className="w-1/3 aspect-square bg-bgPulse_l dark:bg-bgPulse_d animate-pulse rounded-lg"></div>
+          <div className="w-1/3 aspect-square bg-bgPulse_l dark:bg-bgPulse_d animate-pulse rounded-lg"></div>
+        </div>
+      </div>
+      <div className={clsx('mt-3', isLoading ? 'hidden' : '')}>
         <div
           className="text-base xl:text-lg"
           dangerouslySetInnerHTML={{

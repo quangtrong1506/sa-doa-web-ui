@@ -18,6 +18,7 @@ module.exports = {
         textLink_l: '#009FBD',
         textLinkBlue_l: '#0064D1',
         text_l: '#333333',
+        bgPulse_l: '#EEEEEE',
         //Dark
         bgHover_d: 'rgba(255,255,255,0.1)',
         svgDefault_d: '#9ca3af',
@@ -28,6 +29,7 @@ module.exports = {
         text_d: '#f0f2f5',
         textLink_d: '#ffffff',
         textLinkBlue_d: '#0064D1',
+        bgPulse_d: '#18191a',
       },
     },
   },
