@@ -1,7 +1,7 @@
 import { IUser } from '@/redux/features/user/user';
 
 interface IPost {
-  body?: string;
+  content?: string;
   character?: string;
   comment_count?: number;
   cosplayer?: string;
@@ -12,12 +12,12 @@ interface IPost {
   id: string;
   images?: string[];
   like_count?: number;
-  slug: string;
+  slug?: string;
   tags?: string[];
   title: string;
-  updated_ad: string; // ISO string
+  updated_ad?: string; // ISO string
   updated_by?: string;
-  user: IUser;
+  author: IUser;
   videos?: string[];
   view_count?: number;
   category?: string;

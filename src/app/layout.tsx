@@ -1,6 +1,7 @@
 import { BuildConfig } from '@/config/config';
 import { Providers } from '@/presentation/provider';
 import type { Metadata } from 'next';
+
 import 'swiper/css';
 import 'swiper/css/zoom';
 import './globals.css';

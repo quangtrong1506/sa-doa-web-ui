@@ -42,8 +42,8 @@ const PostItem = ({ className, post }: IPostItemProps) => {
             className={clsx('w-full h-full object-cover', isLoading ? 'hidden' : '')}
             width={50}
             height={50}
-            src={post?.user?.avatar || BuildConfig.DEFAULT_USER_AVATAR}
-            alt={post?.user?.avatar || BuildConfig.DEFAULT_USER_AVATAR}
+            src={post?.author?.avatar || BuildConfig.DEFAULT_USER_AVATAR}
+            alt={post?.author?.avatar || BuildConfig.DEFAULT_USER_AVATAR}
           />
         </div>
         <div className="flex-1">
@@ -60,9 +60,9 @@ const PostItem = ({ className, post }: IPostItemProps) => {
                   'font-semibold hover:underline text-textLink_l dark:text-textLink_d ',
                   isLoading ? 'hidden' : '',
                 )}
-                href={'/users/' + post?.user?.id}
+                href={'/users/' + post?.author?.id}
               >
-                {post?.user?.name || BuildConfig.DEFAULT_USER_NAME}
+                {post?.author?.name || BuildConfig.DEFAULT_USER_NAME}
               </Link>
               <span className={clsx('font-semibold text-transparent ', isLoading ? '' : 'hidden')}>
                 -
@@ -101,7 +101,7 @@ const PostItem = ({ className, post }: IPostItemProps) => {
         <div
           className="text-base xl:text-lg"
           dangerouslySetInnerHTML={{
-            __html: post?.body || '',
+            __html: post?.content || '',
           }}
         ></div>
         <div className="text-sm xl:text-base">
