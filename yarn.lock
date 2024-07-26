@@ -4160,10 +4160,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"swiper@npm:^11.1.5":
-  version: 11.1.6
-  resolution: "swiper@npm:11.1.6"
-  checksum: 10c0/f5df7daf70e879a3cb1ce91ebcc3d6bd6863e3ec085c12fc4d49239f0f27eee6059b182db02e57b1127a5ecaedd5125f116a73929c79bdab36c660eacc9f8ebd
+"swiper@npm:^11.1.7":
+  version: 11.1.7
+  resolution: "swiper@npm:11.1.7"
+  checksum: 10c0/de95baf25fbe092f92b9ad216f47e9363052532b6fcb1af396258b5dc3cee41bc2eb8011669fe5a0aef9410bb9496dba1c655b111e0064d61a91664c87bc1ad8
   languageName: node
   linkType: hard
 
@@ -4482,7 +4482,7 @@ __metadata:
     react-dom: "npm:^18"
     react-redux: "npm:^9.1.2"
     react-use: "npm:^17.5.0"
-    swiper: "npm:^11.1.5"
+    swiper: "npm:^11.1.7"
     tailwindcss: "npm:^3.4.1"
     typescript: "npm:^5"
   languageName: unknown

@@ -68,12 +68,10 @@ const PostDetail = () => {
   useEffect(() => {
     setMounted(true);
   }, []);
-  console.log(postReducer);
-  console.log(post);
 
   if (!mounted) return null;
   return (
-    <div className={clsx('w-full h-[calc(100vh_-_55px)] flex', isLoading ? 'hidden' : 'flex')}>
+    <div className={clsx('w-full h-[calc(100vh_-_55px)] flex', isLoading ? 'hidden' : '')}>
       <div
         className={clsx(
           'transition-all ease-in-out duration-200',
@@ -90,11 +88,10 @@ const PostDetail = () => {
             zoom={{ minRatio: 1, maxRatio: 5, toggle: true }}
             modules={[Zoom]}
             onSlideChange={(swiper) => {
-              console.log(swiper.activeIndex);
               router.replace(window.location.href.replace(/(p=\d+)/g, 'p=' + swiper.activeIndex));
             }}
             onSwiper={(swiper) => {
-              // if (photo) swiper.slideTo(parseInt(photo));
+              if (photo) swiper.slideTo(parseInt(photo));
               setIsLoading(false);
             }}
           >
@@ -102,7 +99,7 @@ const PostDetail = () => {
               <SwiperSlide key={image}>
                 <div className="swiper-zoom-container">
                   <Image
-                    className="h-full object-contain object-center"
+                    className="h-full object-contain select-none"
                     width={1920}
                     height={1920}
                     src={image}

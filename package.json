@@ -20,7 +20,7 @@
     "react-dom": "^18",
     "react-redux": "^9.1.2",
     "react-use": "^17.5.0",
-    "swiper": "^11.1.5"
+    "swiper": "^11.1.7"
   },
   "devDependencies": {
     "@types/node": "^20",
