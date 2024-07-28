@@ -17,4 +17,4 @@ const ArrowPrevIcon = ({ className, ...props }: IconProps) => {
    );
 };
 
-export default ArrowPrevIcon;
+export { ArrowPrevIcon };

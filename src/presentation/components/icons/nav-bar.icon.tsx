@@ -16,4 +16,4 @@ const NavBarIcon = ({ className, ...props }: IconProps) => {
       </svg>
    );
 };
-export default NavBarIcon;
+export { NavBarIcon };

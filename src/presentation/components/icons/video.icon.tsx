@@ -18,4 +18,4 @@ const VideoIcon = ({ className, ...props }: IconProps) => {
    );
 };
 
-export default VideoIcon;
+export { VideoIcon };

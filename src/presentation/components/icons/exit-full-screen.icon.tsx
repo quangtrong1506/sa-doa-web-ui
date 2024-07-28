@@ -17,4 +17,4 @@ const ExitFullScreenIcon = ({ className, ...props }: IconProps) => {
    );
 };
 
-export default ExitFullScreenIcon;
+export { ExitFullScreenIcon };

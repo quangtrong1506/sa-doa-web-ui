@@ -17,4 +17,4 @@ const MoreIcon = ({ className, ...props }: IconProps) => {
    );
 };
 
-export default MoreIcon;
+export { MoreIcon };

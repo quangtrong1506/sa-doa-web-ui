@@ -19,4 +19,4 @@ const VideoUserIcon = ({ className, ...props }: IconProps) => {
       </svg>
    );
 };
-export default VideoUserIcon;
+export { VideoUserIcon };

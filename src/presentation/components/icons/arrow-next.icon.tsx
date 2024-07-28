@@ -17,4 +17,4 @@ const ArrowNextIcon = ({ className, ...props }: IconProps) => {
    );
 };
 
-export default ArrowNextIcon;
+export { ArrowNextIcon };

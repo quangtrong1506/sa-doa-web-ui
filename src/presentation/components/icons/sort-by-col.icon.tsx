@@ -19,4 +19,4 @@ const SortByColIcon = ({ className, ...props }: IconProps) => {
       </svg>
    );
 };
-export default SortByColIcon;
+export { SortByColIcon };

@@ -17,4 +17,4 @@ const ReportIcon = ({ className, ...props }: IconProps) => {
    );
 };
 
-export default ReportIcon;
+export { ReportIcon };

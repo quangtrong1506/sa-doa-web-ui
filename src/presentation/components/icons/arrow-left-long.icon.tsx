@@ -16,4 +16,4 @@ const ArrowLeftLongIcon = ({ className, ...props }: IconProps) => {
       </svg>
    );
 };
-export default ArrowLeftLongIcon;
+export { ArrowLeftLongIcon };

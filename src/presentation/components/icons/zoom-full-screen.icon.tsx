@@ -17,4 +17,4 @@ const ZoomFullScreenIcon = ({ className, ...props }: IconProps) => {
    );
 };
 
-export default ZoomFullScreenIcon;
+export { ZoomFullScreenIcon };

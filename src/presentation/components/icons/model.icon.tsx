@@ -17,4 +17,4 @@ const ModelIcon = ({ className, ...props }: IconProps) => {
    );
 };
 
-export default ModelIcon;
+export { ModelIcon };

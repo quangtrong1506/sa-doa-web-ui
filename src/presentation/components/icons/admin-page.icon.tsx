@@ -19,4 +19,4 @@ const AdminPageIcon = ({ className, ...props }: IconProps) => {
       </svg>
    );
 };
-export default AdminPageIcon;
+export { AdminPageIcon };

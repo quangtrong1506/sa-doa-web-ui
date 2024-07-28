@@ -19,4 +19,4 @@ const ZoomOutIcon = ({ className, ...props }: IconProps) => {
       </svg>
    );
 };
-export default ZoomOutIcon;
+export { ZoomOutIcon };

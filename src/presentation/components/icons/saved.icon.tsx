@@ -17,4 +17,4 @@ const SavedIcon = ({ className, ...props }: IconProps) => {
    );
 };
 
-export default SavedIcon;
+export { SavedIcon };

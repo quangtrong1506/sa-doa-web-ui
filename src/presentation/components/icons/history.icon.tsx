@@ -20,4 +20,4 @@ const HistoryIcon = ({ className, ...props }: IconProps) => {
    );
 };
 
-export default HistoryIcon;
+export { HistoryIcon };

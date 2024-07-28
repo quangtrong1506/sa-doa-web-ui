@@ -20,4 +20,4 @@ const ImageIcon = ({ className, ...props }: IconProps) => {
    );
 };
 
-export default ImageIcon;
+export { ImageIcon };

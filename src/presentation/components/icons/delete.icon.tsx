@@ -20,4 +20,4 @@ const DeleteIcon = ({ className, ...props }: IconProps) => {
    );
 };
 
-export default DeleteIcon;
+export { DeleteIcon };

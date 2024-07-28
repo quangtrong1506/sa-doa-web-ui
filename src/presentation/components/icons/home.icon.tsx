@@ -17,4 +17,4 @@ const HomeIcon = ({ className, ...props }: IconProps) => {
    );
 };
 
-export default HomeIcon;
+export { HomeIcon };

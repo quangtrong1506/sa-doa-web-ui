@@ -16,4 +16,4 @@ const XMarkIcon = ({ className, ...props }: IconProps) => {
       </svg>
    );
 };
-export default XMarkIcon;
+export { XMarkIcon };

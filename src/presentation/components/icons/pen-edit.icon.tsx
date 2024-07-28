@@ -17,4 +17,4 @@ const PenEditIcon = ({ className, ...props }: IconProps) => {
    );
 };
 
-export default PenEditIcon;
+export { PenEditIcon };

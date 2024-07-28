@@ -26,4 +26,4 @@ const SearchIcon = ({ className, ...props }: IconProps) => {
       </svg>
    );
 };
-export default SearchIcon;
+export { SearchIcon };
