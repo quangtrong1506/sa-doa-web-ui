@@ -1,8 +1,7 @@
 import clsx from 'clsx';
 import React, { useRef, useState } from 'react';
 import { useClickAway } from 'react-use';
-import ArrowDownIcon from '@/presentation/components/icons/arrow-down.icon';
-
+import { ArrowDownIcon } from '../../icons';
 
 type Props = {
   itemClassName?: string;
@@ -28,10 +27,12 @@ const NavOpenDown = ({ className, itemClassName, label, icon, items, ...props }:
         <span className="font-medium text-black dark:text-white">{label}</span>
       </div>
       <span className="w-5 h-5 absolute right-0 top-1" onClick={() => setShow(!show)}>
-        <ArrowDownIcon
-          className={clsx('transition-all duration-200 ease-in-out', show ? 'rotate-180' : '')}
-        />
-      </span>
+            <ArrowDownIcon
+              width={20}
+              height={20}
+              className={clsx('transition-all duration-200 ease-in-out', show ? 'rotate-180' : '')}
+            />
+         </span>
       <div
         className={clsx('overflow-hidden transition-all duration-300 ease-in-out ')}
         style={{
@@ -43,7 +44,7 @@ const NavOpenDown = ({ className, itemClassName, label, icon, items, ...props }:
         <ul className="flex flex-col gap-2 mt-5 transition-none duration-0">
           {items.map((item, index) => (
             <li
-              className="w-full flex justify-start items-center ps-8 py-2 rounded-md h-12 dark:hover:bg-bgContentDark hover:bg-main/10 transition-none duration-0"
+              className="w-full flex justify-start items-center ps-8 py-2 rounded-md h-12 dark:hover:bg-bgContent_d hover:bg-main/10 transition-none duration-0"
               key={index}
             >
               {item}

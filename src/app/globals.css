@@ -17,9 +17,15 @@
 }
 
 @layer utilities {
+  body {
+    @apply bg-bgBody_l dark:bg-bgBody_d;
+    font-family: Arial, sans-serif;
+  }
+
   [data-tooltip]:hover .tool-tip {
     display: block;
   }
+
   .string-404 {
     display: flex;
     flex-direction: column;

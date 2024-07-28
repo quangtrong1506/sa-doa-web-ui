@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import { IconProps } from '@/presentation/components/icons/interface';
 
 const SignupIcon = ({ className, ...props }: IconProps) => {
   return (

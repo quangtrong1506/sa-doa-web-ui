@@ -2,11 +2,9 @@
 import clsx from 'clsx';
 import { KeyboardEvent, useEffect, useRef, useState } from 'react';
 import { useDebounce } from 'react-use';
-import ArrowLeftLongIcon from '../icons/arrow-left-long.icon';
-import HistoryIcon from '../icons/history.icon';
-import XMarkIcon from '../icons/xmark.icon';
+import { XMarkIcon, HistoryIcon, ArrowLeftLongIcon } from '../icons';
 import Tooltip from '../reuse/tooltip';
-import { MyHistory } from '@/data/datasource/local/model/MyHistory';
+import { MyHistory } from '@/data/datasource/model/MyHistory';
 import { HistoryRepository } from '@/data/datasource/local/HistoryRepository';
 
 const BigSearchHeader = ({ closeEvent }: { closeEvent: () => void }) => {

@@ -3,27 +3,34 @@ import { NAV_LINK } from '@/presentation/constants/jsx-constants';
 import clsx from 'clsx';
 import { useEffect, useRef, useState } from 'react';
 import { useClickAway, useWindowSize } from 'react-use';
-import NavBarIcon from '../icons/nav-bar.icon';
-import SearchIcon from '../icons/search.icon';
-import XMarkIcon from '../icons/xmark.icon';
+import { NavBarIcon, SearchIcon, XMarkIcon } from '../icons';
 import NavItem from '../reuse/nav/nav-item';
 import AuthHeader from './auth.header';
 import BigSearchHeader from './big-search.header';
 import NavHeader from './nav.header';
 import SearchHeader from './search.header';
+import { usePathname } from 'next/navigation';
 
 const Header = () => {
   const [showNav, setShowNav] = useState<boolean>(false);
   const [isShowSearchInput, setIsShowSearchInput] = useState<boolean>(false);
   const NavRef = useRef<HTMLDivElement>(null);
   const SearchRef = useRef<HTMLDivElement>(null);
+  const [mounted, setMounted] = useState<boolean>(false);
   useClickAway(NavRef, () => setShowNav(false));
   useClickAway(SearchRef, () => setIsShowSearchInput(false));
   let { width } = useWindowSize();
+  const pathname = usePathname();
   useEffect(() => {
     if (width > 1024 && showNav) setShowNav(false);
   }, [showNav, width]);
-
+  useEffect(() => {
+    setShowNav(false);
+  }, [pathname]);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+  if (!mounted) return null;
   return (
     <>
       <div className="flex h-[55px] w-full items-center justify-between [&>div]:h-full gap-3 relative z-50">
@@ -62,7 +69,7 @@ const Header = () => {
 
               <div
                 className={clsx(
-                  'fixed top-[56px] bottom-0 w-96 max-[500px]:w-full bg-white dark:bg-bgContentDark right-0 z-0 shadow-md dark:border-r dark:border-white/10',
+                  'fixed top-[56px] bottom-0 w-96 max-[500px]:w-full bg-white dark:bg-bgContent_d right-0 z-0 shadow-md dark:border-r dark:border-white/10',
                   'transition-all duration-300 ease-in-out',
                   showNav ? 'translate-x-0' : 'translate-x-full',
                 )}
@@ -91,12 +98,12 @@ const Header = () => {
               />
               <div
                 className={clsx(
-                  'fixed top-[56px] bottom-0 w-96 max-[500px]:w-full bg-white dark:bg-bgContentDark right-0 z-0 shadow-md dark:border-r dark:border-white/10',
+                  'fixed top-[55px] bottom-0 w-96 max-[500px]:w-full bg-white dark:bg-bgContent_d right-0 z-0 shadow-md dark:border-r dark:border-white/10',
                   'transition-all duration-300 ease-in-out',
                   showNav ? 'translate-x-0' : 'translate-x-full',
                 )}
               >
-                <NavHeader></NavHeader>
+                <NavHeader/>
               </div>
             </div>
           </div>
@@ -104,7 +111,10 @@ const Header = () => {
         <div className="flex-1 max-w-[360px] h-full lg:block hidden">
           <AuthHeader />
         </div>
-        <div className="flex-1 h-full lg:hidden" ref={SearchRef}>
+        <div
+          className={clsx('flex-1 h-full lg:hidden', isShowSearchInput ? '' : 'hidden')}
+          ref={SearchRef}
+        >
           <BigSearchHeader
             closeEvent={() => {
               setIsShowSearchInput(false);

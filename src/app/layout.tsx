@@ -2,6 +2,8 @@ import { BuildConfig } from '@/config/config';
 import { Providers } from '@/presentation/provider';
 import type { Metadata } from 'next';
 import './globals.css';
+import 'swiper/css';
+import 'swiper/css/zoom';
 
 export const metadata: Metadata = {
   title: {

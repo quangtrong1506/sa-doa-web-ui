@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import { IconProps } from '@/presentation/components/icons/interface';
 
 const LogoutIcon = ({ className, ...props }: IconProps) => {
   return (

@@ -4,7 +4,10 @@ import Image from 'next/image';
 import React, { FormEvent } from 'react';
 import { Routes } from '@/presentation/constants/Routes';
 import { CustomerRepository } from '@/data/datasource/local/CustomerRepository';
-import { CustomerImpl } from '@/data/datasource/local/model/Customer';
+import { CustomerImpl } from '@/data/datasource/model/User';
+import Link from 'next/link';
+import { setUser } from '@/data/datasource/redux/features/user';
+import { store } from '@/data/datasource/redux/store';
 
 const authStr = {
   signup: {
@@ -61,6 +64,7 @@ class Auth extends React.Component<{ isSignup: boolean }, AuthViewModel> {
   constructor(prop: { isSignup: boolean }) {
     super(prop);
     console.log('isSignup', prop.isSignup);
+
     this.state = {
       isSignup: prop.isSignup,
       email: '',
@@ -101,6 +105,7 @@ class Auth extends React.Component<{ isSignup: boolean }, AuthViewModel> {
   }
 
   render() {
+
     const { isSignup, email, password, repassword, isFailRePassword, isFailPassword } = this.state;
     const str = isSignup ? authStr.signup : authStr.login;
     const strOpposite = isSignup ? authStr.login : authStr.signup;
@@ -253,12 +258,12 @@ class Auth extends React.Component<{ isSignup: boolean }, AuthViewModel> {
                   </button>
                   <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                     {str.message}
-                    <a
+                    <Link
                       href={str.href}
                       className="font-medium text-primary-600 hover:underline dark:text-primary-500"
                     >
                       {strOpposite.title}
-                    </a>
+                    </Link>
                   </p>
                 </form>
               </div>

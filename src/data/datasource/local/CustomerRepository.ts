@@ -1,15 +1,15 @@
-import { Customer } from '@/data/datasource/local/model/Customer';
+import { User } from '@/data/datasource/model/User';
 
 const CUSTOMER_KEY = 'customerStorage';
 
-const saveCustomer = (customer: Customer) => {
+const saveCustomer = (customer: User) => {
   localStorage.setItem(CUSTOMER_KEY, JSON.stringify(customer));
 };
 
 const getCustomer = () => {
   const customer = localStorage.getItem(CUSTOMER_KEY)
   if(customer) {
-    return JSON.parse(customer) as Customer
+    return JSON.parse(customer) as User
   }
   return undefined;
 };
