@@ -11,6 +11,7 @@ import XMarkIcon from '../icons/xmark.icon';
 import Tooltip from '../reuse/tooltip';
 import { MyHistory } from '@/data/datasource/local/model/MyHistory';
 import { HistoryRepository } from '@/data/datasource/local/HistoryRepository';
+import { BuildConfig } from '@/config/config';
 
 const SearchHeader = () => {
   const [focus, setFocus] = useState<boolean>(false);
@@ -73,7 +74,7 @@ const SearchHeader = () => {
                   className="w-full h-full object-contain"
                   width={55}
                   height={55}
-                  src={'/images/logo.png'}
+                  src={BuildConfig.LOGO}
                   alt="logo"
                 ></Image>
               )}

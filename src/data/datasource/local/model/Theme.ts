@@ -1,6 +1,7 @@
 enum Theme {
   Light = "light",
-  Dark = "dark"
+  Dark = "dark",
+  System = "system",
 }
 
 export {Theme}
