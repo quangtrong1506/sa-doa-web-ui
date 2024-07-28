@@ -1,8 +1,4 @@
-import HomeIcon from '@/presentation/components/icons/home.icon';
-import VideoIcon from '@/presentation/components/icons/video.icon';
-import ImageIcon from '@/presentation/components/icons/image.icon';
-import ModelIcon from '@/presentation/components/icons/model.icon';
-import SavedIcon from '@/presentation/components/icons/saved.icon';
+import { HomeIcon, ImageIcon, ModelIcon, SavedIcon, VideoIcon } from '../components/icons';
 import { Routes } from '@/presentation/constants/Routes';
 
 
@@ -13,18 +9,18 @@ const NAV_LINK = {
     icon: <HomeIcon />,
   },
   videos: {
-    title: 'Tất cả video',
+    title: 'Videos',
     href: Routes.Videos,
     icon: <VideoIcon />,
   },
   images: {
-    title: 'Tất cả hình ảnh',
+    title: 'Hình ảnh',
     href: Routes.Images,
     icon: <ImageIcon />,
   },
   models: {
-    title: 'Người mẫu',
-    href: Routes.Models,
+    title: 'Cosplayers',
+    href: Routes.Cosplayers,
     icon: <ModelIcon />,
   },
   about: {

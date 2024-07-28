@@ -3,6 +3,16 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'i.ibb.co',
+        port: '',
+        pathname: '**',
+      },
+    ],
+  },
 };
 
 export default nextConfig;

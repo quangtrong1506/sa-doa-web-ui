@@ -1,4 +1,4 @@
-import { MyHistory } from '@/data/datasource/local/model/MyHistory';
+import { MyHistory } from '@/data/datasource/model/MyHistory';
 
 
 const HISTORY_KEY = 'searchHistory';
@@ -35,11 +35,16 @@ const deleteSearchHistory = (id: string) => {
   const updatedHistory = currentHistory.filter((history) => history.id !== id);
   localStorage.setItem(HISTORY_KEY, JSON.stringify(updatedHistory));
 };
+const clearSearchHistory = () => {
+  localStorage.removeItem(HISTORY_KEY);
+};
 
 const HistoryRepository = {
+  getAllSearchHistory,
   getSearchHistory,
   createNewSearchHistory,
   deleteSearchHistory,
+  clearSearchHistory,
 };
 
 export {HistoryRepository}

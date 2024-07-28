@@ -6,7 +6,8 @@ export enum Routes {
   Home = "/",
   Videos = "/videos",
   Images = "/images",
-  Models = "/models",
+  Cosplayers = "/cosplayers",
   Login = "/login",
   Signup = "/signup",
+  Search = "/search?q="
 }

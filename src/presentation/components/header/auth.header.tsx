@@ -8,8 +8,11 @@ import Tooltip from '../reuse/tooltip';
 import ThemeSwitch from '../theme-mode/theme-switch';
 import NavHeader from './nav.header';
 import { BuildConfig } from '@/config/config';
+import { useAppSelector } from '@/data/datasource/redux/store';
+import { Routes } from '@/presentation/constants/Routes';
 
 const AuthHeader = () => {
+  const userReducer = useAppSelector((state) => state.userReducer);
   const [isShowNav, setIsShowNav] = useState<boolean>(false);
   const [mounted, setMounted] = useState<boolean>(false);
   const NavRef = useRef<HTMLDivElement>(null);
@@ -24,13 +27,21 @@ const AuthHeader = () => {
       <div ref={NavRef}>
         <Link
           data-tooltip
-          className="font-medium hover:bg-bgHover_l p-2 rounded-md relative hidden"
-          href={'/login'}
+          className={clsx(
+            'font-medium bg-bgHover_l py-2 px-3 rounded-md relative ',
+            userReducer.isLoading || !userReducer.data ? '' : 'hidden',
+          )}
+          href={Routes.Login}
         >
           Login
           <Tooltip anchor="left">Đăng nhập tài khoản của bạn</Tooltip>
         </Link>
-        <div data-tooltip className="w-9 h-9 flex justify-center items-center relative">
+        <div data-tooltip
+             className={clsx(
+               'w-9 h-9 flex justify-center items-center relative',
+               userReducer.isLoading || !userReducer.data ? 'hidden' : 'flex',
+             )}
+        >
           <div
             className="w-full h-full flex justify-center items-center rounded-full border dark:border-white/10 dark:bg-bgHover_d cursor-pointer overflow-hidden"
             onClick={() => {
@@ -41,7 +52,7 @@ const AuthHeader = () => {
               className="w-full h-full object-contain"
               width={55}
               height={55}
-              src={BuildConfig.LOGO}
+              src={userReducer.data?.avatar || BuildConfig.DEFAULT_USER_AVATAR}
               alt="logo"
             />
           </div>
@@ -49,7 +60,7 @@ const AuthHeader = () => {
         </div>
         <div
           className={clsx(
-            'absolute w-[400px] min-h-[200px] top-[70px] right-0 bg-white rounded-lg dark:bg-bgContentDark border border-transparent dark:border-white/10 overflow-hidden',
+            'absolute w-[400px] min-h-[200px] top-[70px] right-0 bg-white rounded-lg dark:bg-bgContent_d border border-transparent dark:border-white/10 overflow-hidden',
             isShowNav ? 'block' : 'hidden',
           )}
         >

@@ -4,14 +4,13 @@ import clsx from 'clsx';
 import Image from 'next/image';
 import { KeyboardEvent, useEffect, useRef, useState } from 'react';
 import { useClickAway, useDebounce } from 'react-use';
-import ArrowLeftLongIcon from '../icons/arrow-left-long.icon';
-import HistoryIcon from '../icons/history.icon';
-import SearchIcon from '../icons/search.icon';
-import XMarkIcon from '../icons/xmark.icon';
+import { ArrowLeftLongIcon, HistoryIcon, SearchIcon, XMarkIcon } from '../icons';
 import Tooltip from '../reuse/tooltip';
-import { MyHistory } from '@/data/datasource/local/model/MyHistory';
+import { MyHistory } from '@/data/datasource/model/MyHistory';
 import { HistoryRepository } from '@/data/datasource/local/HistoryRepository';
 import { BuildConfig } from '@/config/config';
+import { useRouter } from 'next/navigation';
+import { Routes } from '@/presentation/constants/Routes';
 
 const SearchHeader = () => {
   const [focus, setFocus] = useState<boolean>(false);
@@ -19,6 +18,7 @@ const SearchHeader = () => {
   const [mounted, setMounted] = useState<boolean>(false);
   const [showInput, setShowInput] = useState<boolean>(false);
   const [keyword, setKeyword] = useState<string>('');
+  const router = useRouter();
   const RootRef = useRef<HTMLDivElement>(null);
   const InputRef = useRef<HTMLInputElement>(null);
   useClickAway(RootRef, () => closeSearchInput());
@@ -33,6 +33,7 @@ const SearchHeader = () => {
         HistoryRepository.createNewSearchHistory(keyword);
         setHistory(HistoryRepository.getSearchHistory());
         setKeyword('');
+        router.push(`${Routes.Search}${keyword}`);
       }
     }
   };
