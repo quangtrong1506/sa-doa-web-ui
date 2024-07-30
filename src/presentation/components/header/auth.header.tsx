@@ -29,7 +29,7 @@ const AuthHeader = () => {
           data-tooltip
           className={clsx(
             'font-medium bg-bgHover_l py-2 px-3 rounded-md relative ',
-            userReducer.isLoading || !userReducer.data ? '' : 'hidden',
+            userReducer.isLoading || !userReducer.user ? '' : 'hidden',
           )}
           href={Routes.Login}
         >
@@ -39,7 +39,7 @@ const AuthHeader = () => {
         <div data-tooltip
              className={clsx(
                'w-9 h-9 flex justify-center items-center relative',
-               userReducer.isLoading || !userReducer.data ? 'hidden' : 'flex',
+               userReducer.isLoading || !userReducer.user ? 'hidden' : 'flex',
              )}
         >
           <div
@@ -52,7 +52,7 @@ const AuthHeader = () => {
               className="w-full h-full object-contain"
               width={55}
               height={55}
-              src={userReducer.data?.avatar || BuildConfig.DEFAULT_USER_AVATAR}
+              src={userReducer.user?.avatar || BuildConfig.DEFAULT_USER_AVATAR}
               alt="logo"
             />
           </div>

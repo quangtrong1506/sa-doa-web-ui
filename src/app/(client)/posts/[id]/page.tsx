@@ -34,7 +34,7 @@ const PostDetail = () => {
    const [sliderIndex, setSliderIndex] = useState<number>(0);
 
    const handleCloseClick = () => {
-      if (urlReducer.data) router.back();
+      if (urlReducer.url) router.back();
       else router.push('/', { scroll: false });
       dispatch(resetUrlBack());
       dispatch(resetPost());
@@ -52,7 +52,7 @@ const PostDetail = () => {
       setIsViewAsSlider(true);
    };
    useEffect(() => {
-      if (!postReducer.isLoading && postReducer.data) setPost(postReducer.data);
+      if (!postReducer.isLoading && postReducer.post) setPost(postReducer.post);
    }, [postReducer]);
    useEffect(() => {
       setMounted(true);

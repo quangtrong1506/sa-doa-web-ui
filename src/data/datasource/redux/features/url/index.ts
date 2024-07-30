@@ -1,12 +1,11 @@
 'use client';
 
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { InitState } from '@/data/datasource/model/InitState';
+import { InitState, UrlState } from '@/data/datasource/model/InitState';
 import { MyUrl } from '@/data/datasource/model/MyUrl';
 
-const initialState: InitState = {
-  isLoading: false,
-  data: undefined,
+const initialState: UrlState = {
+  isLoading: true, url: undefined,
 };
 
 export const urlSlice = createSlice({
@@ -20,18 +19,15 @@ export const urlSlice = createSlice({
       };
     },
     setUrlBack: (state, action: PayloadAction<string>) => {
-      if(state.data !== undefined) {
-        console.log(state)
-        return {
-          isLoading: false,
-          url: { ...state.data.url, back: action.payload },
-        };
-      }
+      return {
+        isLoading: false,
+        url: { ...state.url, back: action.payload },
+      };
     },
     resetUrlBack: (_state) => {
       return {
         ..._state,
-        url: { ..._state.data.url, back: undefined },
+        url: { ..._state.url, back: undefined },
       };
     },
   },

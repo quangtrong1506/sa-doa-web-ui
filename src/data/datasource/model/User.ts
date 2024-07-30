@@ -11,13 +11,4 @@ interface User {
   status: Status;
 }
 
-export class CustomerImpl implements User {
-  email: string = 'Chưa đăng nhập';
-  id: string = '';
-  name: string = 'Tài khoản';
-  password: string = '';
-  role = Role.User;
-  status = Status.Active;
-}
-
 export type { User };
