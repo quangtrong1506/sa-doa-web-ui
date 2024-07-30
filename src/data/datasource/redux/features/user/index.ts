@@ -1,13 +1,12 @@
 'use client';
 
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { InitState } from '@/data/datasource/model/InitState';
+import { InitState, UserState } from '@/data/datasource/model/InitState';
 import { User } from '@/data/datasource/model';
 
 // user: undefined
-const initialState: InitState = {
-  isLoading: true,
-  data: undefined,
+const initialState: UserState = {
+  isLoading: true, user: undefined,
 };
 
 export const userSlice = createSlice({
@@ -15,26 +14,20 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     setUser: (_state, action: PayloadAction<User>) => {
-      _state = {
-        isLoading: false,
-        data: action.payload,
-      }
+      console.log("action.payload", action.payload);
       return {
         isLoading: false,
         user: action.payload,
       };
     },
     renameUser: (state, action: PayloadAction<string>) => {
-      const name = action.payload;
-      if (state.data)
-        return {
-          ...state,
-          user: {
-            ...state.data,
-            name,
-          },
-        };
-      else return state;
+      // return {
+      //   ...state,
+      //   user: {
+      //     ...state.user,
+      //     name: action.payload,
+      //   },
+      // };
     },
     clearUser: () => {
       return {

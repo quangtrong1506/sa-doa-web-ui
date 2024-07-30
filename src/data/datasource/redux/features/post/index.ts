@@ -2,12 +2,11 @@
 
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Post } from '@/data/datasource/model/Post';
-import { InitState } from '@/data/datasource/model/InitState';
+import { InitState, PostState } from '@/data/datasource/model/InitState';
 import post from '@/presentation/components/reuse/post';
 
-const initialState: InitState = {
-  isLoading: true,
-  data: null,
+const initialState: PostState = {
+  isLoading: true, post: undefined
 };
 
 export const postSlice = createSlice({

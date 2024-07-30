@@ -17,9 +17,8 @@ import {
   VideoUserIcon,
 } from '@/presentation/components/icons';
 import { useAppSelector } from '@/data/datasource/redux/store';
-import { CustomerImpl, Role } from '@/data/datasource/model';
-import { setUser } from '@/data/datasource/redux/features/user';
-import { InitState } from '@/data/datasource/model/InitState';
+import { Role } from '@/data/datasource/model';
+import { Routes } from '@/presentation/constants/Routes';
 
 
 const NavHeader = () => {
@@ -29,7 +28,7 @@ const NavHeader = () => {
 
 
   useEffect(() => {
-    console.log("userReducer.data", userReducer.data);
+    console.log("userReducer.user", userReducer.user);
     setMounted(true);
   }, []);
 
@@ -43,7 +42,7 @@ const NavHeader = () => {
       className=" cursor-pointer rounded-md flex gap-3 justify-start items-center w-full h-full transition-none duration-0"
     >
       <div className={'w-4 h-4'}>
-        <CheckIcon className={theme == 'light' ? '' : 'hidden'} />
+        <CheckIcon width={16} height={16} className={theme == 'light' ? '' : 'hidden'} />
       </div>
       <span className="ms-2 transition-none duration-0 text-black dark:text-white">
         Chế độ sáng
@@ -57,7 +56,7 @@ const NavHeader = () => {
       }}
     >
       <div className={'w-4 h-4'}>
-        <CheckIcon className={theme == 'dark' ? '' : 'hidden'} />
+        <CheckIcon width={16} height={16} className={theme == 'dark' ? '' : 'hidden'} />
       </div>
       <span className="ms-2 transition-none duration-0 text-black dark:text-white">Chế độ tối</span>
     </span>,
@@ -69,34 +68,34 @@ const NavHeader = () => {
       }}
     >
       <div className={'w-4 h-4'}>
-        <CheckIcon className={theme == 'system' ? '' : 'hidden'} />
+        <CheckIcon width={16} height={16} className={theme == 'system' ? '' : 'hidden'} />
       </div>
       <span className="ms-2 transition-none duration-0 text-black dark:text-white">Hệ thống</span>
     </span>,
   ];
 
   return (
-    <div className="w-full h-full overflow-x-hidden overflow-y-auto bg-white dark:bg-bgContentDark ">
+    <div className="w-full h-full overflow-x-hidden overflow-y-auto bg-white dark:bg-bgContent_d ">
       <div className="flex items-center p-6 max-[480px]:px-2">
         <div className="h-full w-full flex justify-between items-center flex-wrap gap-3">
           <div
-            className={clsx(!userReducer.isLoading || !userReducer.data ? 'hidden' : 'flex')}
+            className={clsx(!userReducer.isLoading || !userReducer.user ? 'hidden' : 'flex')}
           >
             <div className="w-12 h-12 overflow-hidden rounded-full border border-main/10">
               <Image
                 width={60}
                 height={60}
                 className="w-full h-full object-contain"
-                src={userReducer.data?.avatar || BuildConfig.DEFAULT_USER_AVATAR}
+                src={userReducer.user?.avatar || BuildConfig.DEFAULT_USER_AVATAR}
                 alt="Logo"
               />
             </div>
             <div className="ms-3 flex flex-col">
                      <span className="text-main text-lg font-bold line-clamp-1">
-                        {userReducer.data?.name || Role.User}
+                        {userReducer.user?.name || Role.User}
                      </span>
               <span className="italic text-sm text-black dark:text-white">
-                        {userReducer.data?.role || Role.User}
+                        {userReducer.user?.role || Role.User}
                      </span>
             </div>
           </div>
@@ -104,7 +103,7 @@ const NavHeader = () => {
           <div
             className={clsx(
               'w-full justify-center mb-2',
-              userReducer.isLoading || !userReducer.data ? 'flex' : 'hidden',
+              userReducer.isLoading || !userReducer.user ? 'flex' : 'hidden',
             )}
           >
             <Link className="px-5 py-2 bg-main text-white rounded-md" href={'/login'}>
@@ -114,10 +113,10 @@ const NavHeader = () => {
 
           <div className="border-b w-full dark:border-white/10"></div>
           <Link
-            href={'/user/me'}
+            href={Routes.User}
             className={clsx(
               'gap-7 p-3 items-center cursor-pointer dark:hover:bg-bgHover_d hover:bg-bgBody_l rounded-xl w-full',
-              userReducer.isLoading || !userReducer.data ? 'hidden' : 'flex',
+              userReducer.isLoading || !userReducer.user ? 'hidden' : 'flex',
             )}
           >
                   <span className="w-6 h-6 inline-block">
@@ -135,7 +134,7 @@ const NavHeader = () => {
             />
           </button>
           <Link
-            href={'/saved'}
+            href={Routes.Saved}
             className="flex gap-7 p-3 items-center cursor-pointer dark:hover:bg-bgHover_d hover:bg-bgBody_l rounded-xl w-full"
           >
                   <span className="w-6 h-6 inline-block">
@@ -144,12 +143,12 @@ const NavHeader = () => {
             <span className="font-medium text-black dark:text-white">Nội dung đã lưu</span>
           </Link>
           <Link
-            href={'/admin'}
+            href={Routes.Admin}
             className={clsx(
               'flex gap-7 p-3 items-center cursor-pointer dark:hover:bg-bgHover_d hover:bg-bgBody_l rounded-xl w-full',
               userReducer.isLoading ||
-              !userReducer.data ||
-              (userReducer.data && userReducer.data?.role === 'user')
+              !userReducer.user ||
+              (userReducer.user && userReducer.user?.role === Role.Admin)
                 ? 'hidden'
                 : 'flex',
             )}
@@ -163,7 +162,7 @@ const NavHeader = () => {
           <button
             className={clsx(
               'flex gap-7 p-3 items-center cursor-pointer dark:hover:bg-bgHover_d hover:bg-bgBody_l rounded-xl w-full',
-              userReducer.isLoading || !userReducer.data ? 'hidden' : 'flex',
+              userReducer.isLoading || !userReducer.user ? 'hidden' : 'flex',
             )}
           >
                   <span className="w-6 h-6 inline-block">

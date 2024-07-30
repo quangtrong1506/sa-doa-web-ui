@@ -1,13 +1,13 @@
 'use client';
 import { BuildConfig } from '@/config/config';
 import Image from 'next/image';
-import React, { FormEvent } from 'react';
-import { Routes } from '@/presentation/constants/Routes';
-import { CustomerRepository } from '@/data/datasource/local/CustomerRepository';
-import { CustomerImpl } from '@/data/datasource/model/User';
+import React, { FormEvent, useEffect } from 'react';
 import Link from 'next/link';
+import { useDispatch } from 'react-redux';
+import { Role, Status, User } from '@/data/datasource/model';
 import { setUser } from '@/data/datasource/redux/features/user';
-import { store } from '@/data/datasource/redux/store';
+import { useRouter } from 'next/navigation';
+import { Routes } from '@/presentation/constants/Routes';
 
 const authStr = {
   signup: {
@@ -23,6 +23,7 @@ const authStr = {
 };
 
 interface AuthViewModel {
+  user?: User;
   isSignup?: boolean;
   email?: string;
   password?: string;
@@ -30,6 +31,7 @@ interface AuthViewModel {
   isRemember?: boolean;
   isFailRePassword?: boolean;
   isFailPassword?: boolean;
+  changeCount?: number;
 }
 
 const DEFAULT_PATTERN = 0;
@@ -60,12 +62,24 @@ const PASSWORD_PATTERN = [
   },
 ];
 
+const SaveAccount = (user: User) => {
+  const dispatch = useDispatch();
+  const router = useRouter()
+  useEffect(() => {
+    console.log('setUser', user);
+    dispatch(setUser(user));
+    router.push(Routes.Home)
+  }, []);
+  return <></>;
+};
+
 class Auth extends React.Component<{ isSignup: boolean }, AuthViewModel> {
   constructor(prop: { isSignup: boolean }) {
     super(prop);
     console.log('isSignup', prop.isSignup);
 
     this.state = {
+      user: undefined,
       isSignup: prop.isSignup,
       email: '',
       password: '',
@@ -73,40 +87,50 @@ class Auth extends React.Component<{ isSignup: boolean }, AuthViewModel> {
       isRemember: false,
       isFailRePassword: false,
       isFailPassword: false,
+      changeCount: 0,
     };
   }
 
   componentDidMount() {
-    const cus = CustomerRepository.getCustomer()
-    if(cus !== undefined) {
-      window.location.href = Routes.Home
-    }
+    // const cus = CustomerRepository.getCustomer();
+    // if (cus !== undefined) {
+    //   window.location.href = Routes.Home;
+    // }
   }
 
   onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const { isSignup, email, password, repassword, isFailRePassword } = this.state;
+    const { changeCount, isSignup, email, password, repassword, isFailRePassword } = this.state;
     if (isSignup) {
       this.setState({
         isFailRePassword: password !== repassword,
       });
     } else {
-      if(email === BuildConfig.USER && password === BuildConfig.PASSWORD) {
-        const cus = new CustomerImpl()
-        cus.email = BuildConfig.USER
-        cus.password = BuildConfig.PASSWORD
-        CustomerRepository.saveCustomer(cus)
-        window.location.href = Routes.Home
-        alert("Đăng nhập thành công")
+      if (email === BuildConfig.USER && password === BuildConfig.PASSWORD) {
+        const _user: User = {
+          avatar: BuildConfig.DEFAULT_USER_AVATAR,
+          email: BuildConfig.USER,
+          id: BuildConfig.USER,
+          name: BuildConfig.USER,
+          password: BuildConfig.PASSWORD,
+          role: Role.User,
+          status: Status.Active,
+        };
+        let count = changeCount ? changeCount : 0;
+        this.setState({
+          user: _user,
+          changeCount: count + 1,
+        });
+        alert('Đăng nhập thành công');
       } else {
-        alert("Đăng nhập thất bại")
+        alert('Đăng nhập thất bại');
       }
     }
   }
 
   render() {
 
-    const { isSignup, email, password, repassword, isFailRePassword, isFailPassword } = this.state;
+    const { changeCount, user, isSignup, email, password, repassword, isFailRePassword, isFailPassword } = this.state;
     const str = isSignup ? authStr.signup : authStr.login;
     const strOpposite = isSignup ? authStr.login : authStr.signup;
     const pattern = PASSWORD_PATTERN[DEFAULT_PATTERN];
@@ -139,6 +163,7 @@ class Auth extends React.Component<{ isSignup: boolean }, AuthViewModel> {
         </div>
       </>
     );
+    let saveEle = <></>;
 
     if (!isSignup) {
       ele = (
@@ -171,9 +196,16 @@ class Auth extends React.Component<{ isSignup: boolean }, AuthViewModel> {
           </div>
         </>
       );
+      if (user) {
+        saveEle =
+          <SaveAccount id={user.id} name={user.name} email={user.email}
+                       password={user.password} role={user.role}
+                       status={user.status} />;
+      }
     }
     return (
       <>
+        {saveEle}
         <section className="absolute top-0 left-0 h-screen w-screen z-50 bg-gray-50 dark:bg-gray-900">
           <div
             className="flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0"
@@ -192,9 +224,11 @@ class Auth extends React.Component<{ isSignup: boolean }, AuthViewModel> {
               />
               {BuildConfig.APP_NAME}
             </a>
-            <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+            <div
+              className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
               <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-                <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+                <h1
+                  className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                   {str.title}
                 </h1>
                 <form

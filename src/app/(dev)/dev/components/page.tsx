@@ -25,7 +25,7 @@ const POST_DEMO: Post = {
   created_ad: new Date('2024-04-14').toISOString(),
   updated_ad: new Date('2024-04-14').toISOString(),
   content: 'Ria Kurumi cosplay Vampire – Azur Lane “60 photos and 1 video”',
-  images: BuildConfig.IMAGES_DEFAULT,
+  images: BuildConfig.IMAGES_18,
 };
 const DemoComponentPage = () => {
   return (
