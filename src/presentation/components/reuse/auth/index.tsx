@@ -4,7 +4,7 @@ import Image from 'next/image';
 import React, { FormEvent, useEffect } from 'react';
 import Link from 'next/link';
 import { useDispatch } from 'react-redux';
-import { Role, Status, User } from '@/data/datasource/model';
+import { Status, User } from '@/data/datasource/model';
 import { setUser } from '@/data/datasource/redux/features/user';
 import { useRouter } from 'next/navigation';
 import { Routes } from '@/presentation/constants/Routes';
@@ -64,11 +64,11 @@ const PASSWORD_PATTERN = [
 
 const SaveAccount = (user: User) => {
   const dispatch = useDispatch();
-  const router = useRouter()
+  const router = useRouter();
   useEffect(() => {
     console.log('setUser', user);
     dispatch(setUser(user));
-    router.push(Routes.Home)
+    router.push(Routes.Home);
   }, []);
   return <></>;
 };
@@ -106,24 +106,22 @@ class Auth extends React.Component<{ isSignup: boolean }, AuthViewModel> {
         isFailRePassword: password !== repassword,
       });
     } else {
-      if (email === BuildConfig.USER && password === BuildConfig.PASSWORD) {
-        const _user: User = {
-          avatar: BuildConfig.DEFAULT_USER_AVATAR,
-          email: BuildConfig.USER,
-          id: BuildConfig.USER,
-          name: BuildConfig.USER,
-          password: BuildConfig.PASSWORD,
-          role: Role.User,
-          status: Status.Active,
-        };
-        let count = changeCount ? changeCount : 0;
-        this.setState({
-          user: _user,
-          changeCount: count + 1,
-        });
-        alert('Đăng nhập thành công');
-      } else {
-        alert('Đăng nhập thất bại');
+      let isOkay = false
+      BuildConfig.USER_LIST.forEach((value, index) => {
+        if (email === value.email && password === value.password && value.status === Status.Active) {
+          let count = changeCount ? changeCount : 0;
+          this.setState({
+            user: value,
+            changeCount: count + 1,
+          });
+          isOkay = true
+          alert('Đăng nhập thành công!');
+          return
+        }
+      });
+
+      if(!isOkay) {
+        alert('Đăng nhập thất bại!');
       }
     }
   }
