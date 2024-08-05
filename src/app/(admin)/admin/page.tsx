@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import DefaultLayout from '@/presentation/components/admin-components/layouts/DefaultLayout';
 
 export const metadata: Metadata = {
   title: 'Admin',
@@ -7,7 +8,11 @@ export const metadata: Metadata = {
 };
 
 const AdminPage = () => {
-  return <div>AdminPage</div>;
+  return (
+    <DefaultLayout>
+      <div>Test</div>
+    </DefaultLayout>
+  );
 };
 
 export default AdminPage;
