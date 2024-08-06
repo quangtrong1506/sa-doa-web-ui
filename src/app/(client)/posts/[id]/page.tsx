@@ -114,7 +114,7 @@ const PostDetail = () => {
                            )}
                            href={'/users/' + post?.author?.id}
                         >
-                           {post?.author?.name || BuildConfig.USER}
+                           {post?.author?.name || BuildConfig.USER_LIST[0].name}
                         </Link>
                      </span>
                      <span

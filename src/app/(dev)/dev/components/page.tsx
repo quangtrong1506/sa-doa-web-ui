@@ -3,15 +3,7 @@ import { Post } from '@/data/datasource/model/Post';
 import { Cosplayer, Role, Status, User } from '@/data/datasource/model';
 import { BuildConfig } from '@/config/config';
 
-const user: User = {
-  email: '',
-  id: 'user-1',
-  name: BuildConfig.USER,
-  password: BuildConfig.PASSWORD,
-  role: Role.User,
-  status: Status.Active,
-  avatar: BuildConfig.DEFAULT_USER_AVATAR,
-};
+const user: User = BuildConfig.USER_LIST[0]
 
 const POST_DEMO: Post = {
   id: '1',

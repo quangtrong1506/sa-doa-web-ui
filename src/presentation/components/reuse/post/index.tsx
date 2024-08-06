@@ -79,7 +79,7 @@ const PostItem = ({ className, post }: IPostItemProps) => {
                         )}
                         href={'/users/' + post?.author?.id}
                      >
-                        {post?.author?.name || BuildConfig.USER}
+                        {post?.author?.name || BuildConfig.USER_LIST[0].name}
                      </Link>
                      <span
                         className={clsx(
