@@ -1,1 +1,2 @@
-export * from './getTimeAgoString'
+export * from './getTimeAgoString';
+export * from './string';

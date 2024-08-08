@@ -1,6 +1,10 @@
 'use client';
 
 import { BuildConfig } from '@/config/config';
+import { Post } from '@/data/datasource/model/Post';
+import { setPost } from '@/data/datasource/redux/features/post';
+import { setUrlBack } from '@/data/datasource/redux/features/url';
+import { getTimeAgo } from '@/presentation/helper';
 import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -9,10 +13,6 @@ import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import GridImage from '../image/grid.image';
 import MorePostComponent from './more.post';
-import { Post } from '@/data/datasource/model/Post';
-import { setUrlBack } from '@/data/datasource/redux/features/url';
-import { setPost } from '@/data/datasource/redux/features/post';
-import { getTimeAgo } from '@/presentation/helper';
 
 interface IPostItemProps {
    className?: string;
@@ -152,6 +152,44 @@ const PostItem = ({ className, post }: IPostItemProps) => {
                   ))}
                </div>
                <div className="mt-2">
+                  <div className="mb-1 flex flex-col gap-1">
+                     <div
+                        style={{
+                           position: 'relative',
+                           overflow: 'hidden',
+                           paddingBottom: '56.25%',
+                        }}
+                     >
+                        <iframe
+                           src="https://cdn.jwplayer.com/players/vsX93CEa-B7ZsXdD8.html"
+                           width="100%"
+                           height="100%"
+                           frameBorder={0}
+                           scrolling="auto"
+                           title="咬一口兔娘Ovo - 绫华的小憩 [Video]] ‐ ĐượC Tạo Bằng Clipchamp"
+                           style={{ position: 'absolute' }}
+                           allowFullScreen
+                        />
+                     </div>
+                     <div
+                        style={{
+                           position: 'relative',
+                           overflow: 'hidden',
+                           paddingBottom: '56.25%',
+                        }}
+                     >
+                        <iframe
+                           src="https://cdn.jwplayer.com/players/vsX93CEa-B7ZsXdD8.html"
+                           width="100%"
+                           height="100%"
+                           frameBorder={0}
+                           scrolling="auto"
+                           title="咬一口兔娘Ovo - 绫华的小憩 [Video]] ‐ ĐượC Tạo Bằng Clipchamp"
+                           style={{ position: 'absolute' }}
+                           allowFullScreen
+                        />
+                     </div>
+                  </div>
                   <GridImage images={post?.images} onImageClick={handleImageClick}></GridImage>
                </div>
             </div>
