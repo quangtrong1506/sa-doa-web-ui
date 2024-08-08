@@ -1,7 +1,10 @@
+import { Role, Status, User } from '@/data/datasource/model';
+
 const APP_NAME = 'Ốc Sa Đoạ';
 const APP_DESCRIPTION = 'Website chia sẻ tài liệu nghiên cứu khoa học hàng đầu thế giới';
 const LOGO = '/images/logo.png';
-const USER = 'abc@gmail.com';
+const DEFAULT_USER_EMAIL = 'abc@gmail.com';
+const DEFAULT_ADMIN_EMAIL = 'bcd@gmail.com';
 const PASSWORD = '1234567a';
 const DEFAULT_USER_AVATAR = '/images/gif/0.gif';
 const IMAGES_18 = [
@@ -22,11 +25,31 @@ const IMAGES_DEFAULT = [
   '/images/demo/5.jpg',
 ];
 
+const DEFAULT_USER: User = {
+  avatar: DEFAULT_USER_AVATAR,
+  email: DEFAULT_USER_EMAIL,
+  id: DEFAULT_USER_EMAIL,
+  name: DEFAULT_USER_EMAIL,
+  password: PASSWORD,
+  role: Role.User,
+  status: Status.Active,
+};
+
+const DEFAULT_ADMIN: User = {
+  avatar: DEFAULT_USER_AVATAR,
+  email: DEFAULT_ADMIN_EMAIL,
+  id: DEFAULT_ADMIN_EMAIL,
+  name: DEFAULT_ADMIN_EMAIL,
+  password: PASSWORD,
+  role: Role.Admin,
+  status: Status.Active,
+};
+const USER_LIST = [DEFAULT_USER, DEFAULT_ADMIN]
 const BuildConfig = {
   APP_NAME,
   LOGO,
   APP_DESCRIPTION,
-  USER,
+  USER_LIST,
   PASSWORD,
   DEFAULT_USER_AVATAR,
   IMAGES_18,

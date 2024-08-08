@@ -28,7 +28,6 @@ const NavHeader = () => {
 
 
   useEffect(() => {
-    console.log("userReducer.user", userReducer.user);
     setMounted(true);
   }, []);
 
@@ -148,7 +147,7 @@ const NavHeader = () => {
               'flex gap-7 p-3 items-center cursor-pointer dark:hover:bg-bgHover_d hover:bg-bgBody_l rounded-xl w-full',
               userReducer.isLoading ||
               !userReducer.user ||
-              (userReducer.user && userReducer.user?.role === Role.Admin)
+              (userReducer.user && userReducer.user?.role !== Role.Admin)
                 ? 'hidden'
                 : 'flex',
             )}
