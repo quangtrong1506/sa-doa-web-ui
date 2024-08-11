@@ -1,18 +1,20 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import ClickOutside from '@/presentation/components/admin-components/ClickOutside';
 import { BuildConfig } from '@/config/config';
 import { useAppSelector } from '@/data/datasource/redux/store';
 import { ContactIcon, DownIcon, LogoutIcon, ProfileIcon, SettingIcon } from '@/presentation/components/icons';
+import { useClickAway } from 'react-use';
 
 const DropdownUser = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const userReducer = useAppSelector((state) => state.userReducer);
-
+  const rootRef = useRef<HTMLAnchorElement>(null);
+  useClickAway(rootRef, () => setDropdownOpen(false));
   return (
-    <ClickOutside onClick={() => setDropdownOpen(false)} className="relative">
+    <div className={"relative"}>
       <Link
+        ref={rootRef}
         onClick={() => setDropdownOpen(!dropdownOpen)}
         className="flex items-center gap-4"
         href="#"
@@ -30,14 +32,14 @@ const DropdownUser = () => {
             height={112}
             src={userReducer.user?.avatar || BuildConfig.DEFAULT_USER_AVATAR}
             style={{
-              width: "auto",
-              height: "auto",
+              width: 'auto',
+              height: 'auto',
             }}
             alt="User"
           />
         </span>
 
-        <DownIcon width={12} height={8}/>
+        <DownIcon width={12} height={8} />
       </Link>
 
       {/* <!-- Dropdown Start --> */}
@@ -51,7 +53,7 @@ const DropdownUser = () => {
                 href="/profile"
                 className="flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base"
               >
-                <ProfileIcon width={22} height={22}/>
+                <ProfileIcon width={22} height={22} />
                 My Profile
               </Link>
             </li>
@@ -69,19 +71,19 @@ const DropdownUser = () => {
                 href="/settings"
                 className="flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base"
               >
-                <SettingIcon width={22} height={22}/>
+                <SettingIcon width={22} height={22} />
                 Account Settings
               </Link>
             </li>
           </ul>
-          <button className="flex items-center gap-3.5 px-6 py-4 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base">
-            <LogoutIcon height={22} width={22}/>
+          <button
+            className="flex items-center gap-3.5 px-6 py-4 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base">
+            <LogoutIcon height={22} width={22} />
             Log Out
           </button>
         </div>
       )}
-      {/* <!-- Dropdown End --> */}
-    </ClickOutside>
+    </div>
   );
 };
 

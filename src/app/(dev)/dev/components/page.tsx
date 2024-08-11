@@ -1,6 +1,6 @@
 import PostItem from '@/presentation/components/reuse/post';
 import { Post } from '@/data/datasource/model/Post';
-import { Cosplayer, Role, Status, User } from '@/data/datasource/model';
+import { Cosplayer, User } from '@/data/datasource/model';
 import { BuildConfig } from '@/config/config';
 
 const user: User = BuildConfig.USER_LIST[0]

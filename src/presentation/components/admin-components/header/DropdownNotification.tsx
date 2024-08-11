@@ -1,15 +1,16 @@
-import { useState } from "react";
-import Link from "next/link";
-import ClickOutside from '@/presentation/components/admin-components/ClickOutside';
+import { useRef, useState } from 'react';
+import Link from 'next/link';
 import { BellIcon } from '@/presentation/components/icons';
+import { useClickAway } from 'react-use';
 
 const DropdownNotification = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [notifying, setNotifying] = useState(true);
+  const rootRef = useRef<HTMLLIElement>(null);
+  useClickAway(rootRef, () => setDropdownOpen(false));
 
   return (
-    <ClickOutside onClick={() => setDropdownOpen(false)} className="relative">
-      <li>
+      <li ref={rootRef}>
         <Link
           onClick={() => {
             setNotifying(false);
@@ -107,7 +108,6 @@ const DropdownNotification = () => {
           </div>
         )}
       </li>
-    </ClickOutside>
   );
 };
 
