@@ -1,10 +1,9 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
-import ClickOutside from '@/presentation/components/admin-components/ClickOutside';
 import SidebarItem from '@/presentation/components/admin-components/sidebar/SidebarItem';
 import { BuildConfig } from '@/config/config';
 import { Routes } from '@/presentation/constants/Routes';
@@ -16,6 +15,7 @@ import {
   SettingIcon,
   TableIcon, UiElementIcon,
 } from '@/presentation/components/icons';
+import { useClickAway } from 'react-use';
 
 interface SidebarProps {
   sidebarOpen: boolean;
@@ -114,10 +114,12 @@ const menuGroups = [
 const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
   const pathname = usePathname();
   const [pageName, setPageName] = useState( "dashboard");
-
+  const rootRef = useRef<HTMLBaseElement>(null);
+  useClickAway(rootRef, () => setSidebarOpen(false));
   return (
-    <ClickOutside onClick={() => setSidebarOpen(false)}>
+
       <aside
+        ref={rootRef}
         className={`fixed left-0 top-0 z-9999 flex h-screen w-72.5 flex-col overflow-y-hidden duration-300 ease-linear dark:bg-boxdark lg:translate-x-0 ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
         }`}
@@ -182,7 +184,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
           {/* <!-- Sidebar Menu --> */}
         </div>
       </aside>
-    </ClickOutside>
+
   );
 };
 
