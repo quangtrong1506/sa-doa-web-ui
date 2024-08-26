@@ -5,12 +5,15 @@ import { BuildConfig } from '@/config/config';
 import { useAppSelector } from '@/data/datasource/redux/store';
 import { ContactIcon, DownIcon, LogoutIcon, ProfileIcon, SettingIcon } from '@/presentation/components/icons';
 import { useClickAway } from 'react-use';
+import { Routes } from '@/presentation/constants/Routes';
+import { useRouter } from 'next/navigation';
 
 const DropdownUser = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const userReducer = useAppSelector((state) => state.userReducer);
   const rootRef = useRef<HTMLAnchorElement>(null);
   useClickAway(rootRef, () => setDropdownOpen(false));
+  const router = useRouter()
   return (
     <div className={"relative"}>
       <Link
@@ -45,7 +48,7 @@ const DropdownUser = () => {
       {/* <!-- Dropdown Start --> */}
       {dropdownOpen && (
         <div
-          className={`absolute right-0 mt-4 flex w-62.5 flex-col rounded-sm border border-stroke shadow-default dark:border-strokedark dark:bg-boxdark`}
+          className={`absolute right-0 mt-4 flex w-62.5 flex-col rounded-sm border border-stroke shadow-default dark:border-strokedark dark:bg-boxdark z-999`}
         >
           <ul className="flex flex-col gap-5 border-b border-stroke px-6 py-7.5 dark:border-strokedark">
             <li>
@@ -68,7 +71,11 @@ const DropdownUser = () => {
             </li>
             <li>
               <Link
-                href="/settings"
+                href={Routes.Settings}
+                onClick={(event) => {
+                  event.preventDefault()
+                  router.push(Routes.Settings)
+                }}
                 className="flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base"
               >
                 <SettingIcon width={22} height={22} />
