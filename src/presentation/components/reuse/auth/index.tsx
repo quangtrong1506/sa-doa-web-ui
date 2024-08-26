@@ -198,7 +198,7 @@ class Auth extends React.Component<{ isSignup: boolean }, AuthViewModel> {
         saveEle =
           <SaveAccount id={user.id} name={user.name} email={user.email}
                        password={user.password} role={user.role}
-                       status={user.status} />;
+                       status={user.status}  avatar={user.avatar} bio={user.bio} fullName={user.fullName} phone={user.phone}/>;
       }
     }
     return (

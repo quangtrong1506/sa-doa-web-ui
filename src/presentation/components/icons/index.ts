@@ -39,3 +39,7 @@ export * from './form.icon';
 export * from './table.icon';
 export * from './chart.icon';
 export * from './ui-element.icon';
+export * from './email.icon';
+export * from './edit.icon';
+export * from './upload.icon';
+export * from './expand.icon';

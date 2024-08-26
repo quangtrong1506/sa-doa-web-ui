@@ -9,5 +9,6 @@ export enum Routes {
   Cosplayers = "/cosplayers",
   Login = "/login",
   Signup = "/signup",
-  Search = "/search?q="
+  Search = "/search?q=",
+  Settings = "/settings",
 }
