@@ -4,10 +4,11 @@ import Image from 'next/image';
 import React, { FormEvent, useEffect } from 'react';
 import Link from 'next/link';
 import { useDispatch } from 'react-redux';
-import { Status, User } from '@/data/datasource/model';
+import { Role, Status, User } from '@/data/datasource/model';
 import { setUser } from '@/data/datasource/redux/features/user';
 import { useRouter } from 'next/navigation';
 import { Routes } from '@/presentation/constants/Routes';
+import userCollection from '@/data/datasource/rest/UserCollection';
 
 const authStr = {
   signup: {
@@ -89,6 +90,12 @@ class Auth extends React.Component<{ isSignup: boolean }, AuthViewModel> {
       isFailPassword: false,
       changeCount: 0,
     };
+    userCollection.findAll().then(res => {
+      BuildConfig.USER_LIST.push(res.data);
+      console.log(BuildConfig.USER_LIST);
+    }).catch(e => {
+      console.log(e);
+    });
   }
 
   componentDidMount() {
@@ -105,8 +112,24 @@ class Auth extends React.Component<{ isSignup: boolean }, AuthViewModel> {
       this.setState({
         isFailRePassword: password !== repassword,
       });
+      const date = Date();
+      const user: User = {
+        avatar: '',
+        email: email ? email : '',
+        id: date,
+        name: '',
+        password: password ? password : '',
+        role: Role.User,
+        status: Status.Active,
+      };
+      userCollection.insert(user).then(() => {
+        alert('Đăng ký thành công!');
+      }).catch((e) => {
+        alert('Đăng ký thất bại!');
+        console.log(e);
+      })
     } else {
-      let isOkay = false
+      let isOkay = false;
       BuildConfig.USER_LIST.forEach((value, index) => {
         if (email === value.email && password === value.password && value.status === Status.Active) {
           let count = changeCount ? changeCount : 0;
@@ -114,13 +137,13 @@ class Auth extends React.Component<{ isSignup: boolean }, AuthViewModel> {
             user: value,
             changeCount: count + 1,
           });
-          isOkay = true
+          isOkay = true;
           alert('Đăng nhập thành công!');
-          return
+          return;
         }
       });
 
-      if(!isOkay) {
+      if (!isOkay) {
         alert('Đăng nhập thất bại!');
       }
     }
