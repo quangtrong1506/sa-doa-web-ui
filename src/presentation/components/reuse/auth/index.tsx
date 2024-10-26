@@ -91,8 +91,10 @@ class Auth extends React.Component<{ isSignup: boolean }, AuthViewModel> {
       changeCount: 0,
     };
     userCollection.findAll().then(res => {
-      BuildConfig.USER_LIST.push(res.data);
-      console.log(BuildConfig.USER_LIST);
+      res.forEach(e => {
+        BuildConfig.USER_LIST.push(e);
+      })
+      // console.log(BuildConfig.USER_LIST);
     }).catch(e => {
       console.log(e);
     });
@@ -122,6 +124,7 @@ class Auth extends React.Component<{ isSignup: boolean }, AuthViewModel> {
         role: Role.User,
         status: Status.Active,
       };
+      console.log(user)
       userCollection.insert(user).then(() => {
         alert('Đăng ký thành công!');
       }).catch((e) => {
