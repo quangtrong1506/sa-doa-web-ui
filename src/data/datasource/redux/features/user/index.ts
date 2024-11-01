@@ -1,7 +1,7 @@
 'use client';
 
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { InitState, UserState } from '@/data/datasource/model/InitState';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { UserState } from '@/data/datasource/model/InitState';
 import { User } from '@/data/datasource/model';
 
 // user: undefined

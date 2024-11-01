@@ -7,6 +7,10 @@ const DEFAULT_USER_EMAIL = 'abc@gmail.com';
 const DEFAULT_ADMIN_EMAIL = 'bcd@gmail.com';
 const PASSWORD = '1234567a';
 const DEFAULT_USER_AVATAR = '/images/gif/0.gif';
+const DEFAULT_FULL_NAME = 'Lương Quang Trọng'
+const DEFAULT_PHONE = '0123456789'
+const DEFAULT_NAME = 'Trọng sa đọa'
+const DEFAULT_BIO = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque posuere fermentum urna, eu condimentum mauris tempus ut. Donec fermentum blandit aliquet.'
 const IMAGES_18 = [
   'https://i.ibb.co/ss0kCXr/Shika-hatsu-Busty-school-girl-in-uniform-1.jpg',
   'https://i.ibb.co/61SbLxv/Blacqkl-cosplay-Ganyu-Genshin-Impact-71.jpg',
@@ -28,9 +32,12 @@ const IMAGES_DEFAULT = [
 const DEFAULT_USER: User = {
   avatar: DEFAULT_USER_AVATAR,
   email: DEFAULT_USER_EMAIL,
+  phone: DEFAULT_PHONE,
   id: DEFAULT_USER_EMAIL,
   name: DEFAULT_USER_EMAIL,
+  fullName: DEFAULT_FULL_NAME,
   password: PASSWORD,
+  bio: DEFAULT_BIO,
   role: Role.User,
   status: Status.Active,
 };
@@ -38,9 +45,12 @@ const DEFAULT_USER: User = {
 const DEFAULT_ADMIN: User = {
   avatar: DEFAULT_USER_AVATAR,
   email: DEFAULT_ADMIN_EMAIL,
+  phone: DEFAULT_PHONE,
   id: DEFAULT_ADMIN_EMAIL,
-  name: DEFAULT_ADMIN_EMAIL,
+  name: DEFAULT_NAME,
+  fullName: DEFAULT_FULL_NAME,
   password: PASSWORD,
+  bio: DEFAULT_BIO,
   role: Role.Admin,
   status: Status.Active,
 };
