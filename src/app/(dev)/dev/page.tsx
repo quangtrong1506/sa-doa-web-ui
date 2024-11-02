@@ -2,7 +2,7 @@ import { userAPI } from '@/data/datasource/api/useAPI';
 import Link from 'next/link';
 
 const TestPage = async () => {
-   const use = await userAPI.findByID('1');
+   const use = await userAPI.findAll();
 
    console.log(use);
    return (

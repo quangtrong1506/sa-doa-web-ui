@@ -8,8 +8,8 @@ export type User = {
    // Thêm các trường khác nếu cần
 };
 
-const userAPI = new BaseAPI<User>('users', {
-   baseURL: 'https://api.example.com',
+const userAPI = new BaseAPI<User>('user', {
+   baseURL: 'https://sa-doa-be.vercel.app',
    headers: {
       Authorization: 'Bearer YOUR_TOKEN',
    },
