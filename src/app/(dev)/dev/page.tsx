@@ -1,6 +1,10 @@
+import { userAPI } from '@/data/datasource/api/useAPI';
 import Link from 'next/link';
 
-const Testpage = () => {
+const TestPage = async () => {
+   const use = await userAPI.findByID('1');
+
+   console.log(use);
    return (
       <div className="flex justify-center mt-5">
          <div className="flex w-11/12 md:w-[700px] p-3 bg-white rounded-lg flex-col">
@@ -27,4 +31,4 @@ const Testpage = () => {
    );
 };
 
-export default Testpage;
+export default TestPage;
