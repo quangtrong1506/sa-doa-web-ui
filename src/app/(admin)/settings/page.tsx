@@ -14,25 +14,27 @@ import { useEffect, useState } from 'react';
 // };
 const SettingsPage = () => {
   const userReducer = useAppSelector((state) => state.userReducer);
-  const [ fullName, setFullName ] = useState("");
-  const [ name, setName ] = useState("");
-  const [ phone, setPhone ] = useState("");
-  const [ email, setEmail ] = useState("");
-  const [ bio, setBio ] = useState("");
-  const [ avatar, setAvatar ] = useState("");
+  const [fullName, setFullName] = useState('');
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [email, setEmail] = useState('');
+  const [bio, setBio] = useState('');
+  const [avatar, setAvatar] = useState('');
 
   useEffect(() => {
-    setFullName(userReducer.user?.username)
-    setName(userReducer.user?.name)
-    setPhone(userReducer.user?.phone)
-    setEmail(userReducer.user?.email)
-    setBio(userReducer.user?.bio)
-    setAvatar(userReducer.user?.avatar || BuildConfig.DEFAULT_USER_AVATAR)
-  }, []);
+    if (userReducer.user) {
+      setFullName(userReducer.user.username);
+      setName(userReducer.user.username);
+      setPhone(userReducer.user.phone);
+      setEmail(userReducer.user.email || '');
+      setBio(userReducer.user.bio || '');
+      setAvatar(userReducer.user.avatar || BuildConfig.DEFAULT_USER_AVATAR);
+    }
+  }, [userReducer.user]);
   const saveChange = () => {
 
     // userAPI.createUser()
-    saveImage()
+    saveImage();
   };
 
   const saveImage = () => {
@@ -235,11 +237,17 @@ const SettingsPage = () => {
                       accept="image/*"
                       className="absolute inset-0 z-50 m-0 h-full w-full cursor-pointer p-0 opacity-0 outline-none"
                       onChange={(event) => {
-                        const file = event.target.files.item(0);
-                        if (file) {
-                          const imageUrl = URL.createObjectURL(file);
-                          console.log(imageUrl);
-                          setAvatar(imageUrl)
+                        try {
+                          if (event.target.files) {
+                            const file = event.target.files.item(0);
+                            if (file) {
+                              const imageUrl = URL.createObjectURL(file);
+                              console.log(imageUrl);
+                              setAvatar(imageUrl);
+                            }
+                          }
+                        } catch (e) {
+                          console.log(e);
                         }
                       }}
                     />

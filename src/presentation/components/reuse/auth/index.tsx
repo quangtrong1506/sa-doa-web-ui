@@ -135,7 +135,7 @@ class Auth extends React.Component<{ isSignup: boolean }, AuthViewModel> {
 
   render() {
 
-    const { changeCount, user, isSignup, email, password, repassword, isFailRePassword, isFailPassword } = this.state;
+    const { changeCount, user, isSignup, email, password, rePassword, isFailRePassword, isFailPassword } = this.state;
     const str = isSignup ? authStr.signup : authStr.login;
     const strOpposite = isSignup ? authStr.login : authStr.signup;
     const pattern = PASSWORD_PATTERN[DEFAULT_PATTERN];
