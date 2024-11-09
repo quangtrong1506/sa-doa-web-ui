@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { EditIcon, EmailIcon, ProfileIcon, UploadIcon } from '@/presentation/components/icons';
 import { useAppSelector } from '@/data/datasource/redux/store';
 import { BuildConfig } from '@/config/config';
+import { useEffect, useState } from 'react';
 
 // export const metadata: Metadata = {
 //   title: "Next.js Settings | TailAdmin - Next.js Dashboard Template",
@@ -12,7 +13,32 @@ import { BuildConfig } from '@/config/config';
 //     "This is Next.js Settings page for TailAdmin - Next.js Tailwind CSS Admin Dashboard Template",
 // };
 const SettingsPage = () => {
-  const userReducer = useAppSelector((state) => state.userReducer)
+  const userReducer = useAppSelector((state) => state.userReducer);
+  const [ fullName, setFullName ] = useState("");
+  const [ name, setName ] = useState("");
+  const [ phone, setPhone ] = useState("");
+  const [ email, setEmail ] = useState("");
+  const [ bio, setBio ] = useState("");
+  const [ avatar, setAvatar ] = useState("");
+
+  useEffect(() => {
+    setFullName(userReducer.user?.username)
+    setName(userReducer.user?.name)
+    setPhone(userReducer.user?.phone)
+    setEmail(userReducer.user?.email)
+    setBio(userReducer.user?.bio)
+    setAvatar(userReducer.user?.avatar || BuildConfig.DEFAULT_USER_AVATAR)
+  }, []);
+  const saveChange = () => {
+
+    // userAPI.createUser()
+    saveImage()
+  };
+
+  const saveImage = () => {
+
+  };
+
   return (
     <DefaultLayout>
       <div className="mx-auto max-w-270">
@@ -38,7 +64,7 @@ const SettingsPage = () => {
                       </label>
                       <div className="relative">
                         <span className="absolute left-4.5 top-4">
-                          <ProfileIcon width={20} height={20}/>
+                          <ProfileIcon width={20} height={20} />
                         </span>
                         <input
                           className="w-full rounded border border-stroke bg-gray py-3 pl-11.5 pr-4.5 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
@@ -46,7 +72,10 @@ const SettingsPage = () => {
                           name="fullName"
                           id="fullName"
                           placeholder="Devid Jhon"
-                          value={userReducer.user?.fullName}
+                          onChange={(event) => {
+                            setFullName(event.target.value);
+                          }}
+                          value={fullName}
                         />
                       </div>
                     </div>
@@ -64,7 +93,10 @@ const SettingsPage = () => {
                         name="phoneNumber"
                         id="phoneNumber"
                         placeholder="+990 3343 7865"
-                        value={userReducer.user?.phone}
+                        onChange={(event) => {
+                          setPhone(event.target.value);
+                        }}
+                        value={phone}
                       />
                     </div>
                   </div>
@@ -78,7 +110,7 @@ const SettingsPage = () => {
                     </label>
                     <div className="relative">
                       <span className="absolute left-4.5 top-4">
-                        <EmailIcon width={20} height={20}/>
+                        <EmailIcon width={20} height={20} />
                       </span>
                       <input
                         className="w-full rounded border border-stroke bg-gray py-3 pl-11.5 pr-4.5 text-black focus:border-primary focus-visible:outline-none dark:border-strokedark dark:bg-meta-4 dark:text-white dark:focus:border-primary"
@@ -86,7 +118,10 @@ const SettingsPage = () => {
                         name="emailAddress"
                         id="emailAddress"
                         placeholder="devidjond45@gmail.com"
-                        value={userReducer.user?.email || BuildConfig.USER_LIST[0].email}
+                        onChange={(event) => {
+                          setEmail(event.target.value);
+                        }}
+                        value={email}
                       />
                     </div>
                   </div>
@@ -104,7 +139,10 @@ const SettingsPage = () => {
                       name="Username"
                       id="Username"
                       placeholder="devidjhon24"
-                      value={userReducer.user?.name || BuildConfig.USER_LIST[0].name}
+                      onChange={(event) => {
+                        setName(event.target.value);
+                      }}
+                      value={name}
                     />
                   </div>
 
@@ -117,7 +155,7 @@ const SettingsPage = () => {
                     </label>
                     <div className="relative">
                       <span className="absolute left-4.5 top-4">
-                        <EditIcon width={20} height={20}/>
+                        <EditIcon width={20} height={20} />
                       </span>
 
                       <textarea
@@ -126,7 +164,10 @@ const SettingsPage = () => {
                         id="bio"
                         rows={6}
                         placeholder="Write your bio here"
-                        value={userReducer.user?.bio}
+                        onChange={(event) => {
+                          setBio(event.target.value);
+                        }}
+                        value={bio}
                       ></textarea>
                     </div>
                   </div>
@@ -141,6 +182,9 @@ const SettingsPage = () => {
                     <button
                       className="flex justify-center rounded bg-primary px-6 py-2 font-medium text-gray hover:bg-opacity-90"
                       type="submit"
+                      onClick={(event) => {
+                        saveChange();
+                      }}
                     >
                       Save
                     </button>
@@ -161,7 +205,7 @@ const SettingsPage = () => {
                   <div className="mb-4 flex items-center gap-3">
                     <div className="h-14 w-14 rounded-full">
                       <Image
-                        src={userReducer.user?.avatar || BuildConfig.DEFAULT_USER_AVATAR}
+                        src={avatar}
                         width={55}
                         height={55}
                         alt="User"
@@ -190,10 +234,19 @@ const SettingsPage = () => {
                       type="file"
                       accept="image/*"
                       className="absolute inset-0 z-50 m-0 h-full w-full cursor-pointer p-0 opacity-0 outline-none"
+                      onChange={(event) => {
+                        const file = event.target.files.item(0);
+                        if (file) {
+                          const imageUrl = URL.createObjectURL(file);
+                          console.log(imageUrl);
+                          setAvatar(imageUrl)
+                        }
+                      }}
                     />
                     <div className="flex flex-col items-center justify-center space-y-3">
-                      <span className="flex h-10 w-10 items-center justify-center rounded-full border border-stroke dark:border-strokedark dark:bg-boxdark">
-                        <UploadIcon width={16} height={16}/>
+                      <span
+                        className="flex h-10 w-10 items-center justify-center rounded-full border border-stroke dark:border-strokedark dark:bg-boxdark">
+                        <UploadIcon width={16} height={16} />
                       </span>
                       <p>
                         <span className="text-primary">Click to upload</span> or
@@ -214,6 +267,9 @@ const SettingsPage = () => {
                     <button
                       className="flex justify-center rounded bg-primary px-6 py-2 font-medium text-gray hover:bg-opacity-90"
                       type="submit"
+                      onClick={(event) => {
+                        saveImage();
+                      }}
                     >
                       Save
                     </button>
@@ -225,7 +281,7 @@ const SettingsPage = () => {
         </div>
       </div>
     </DefaultLayout>
-  )
-}
+  );
+};
 
 export default SettingsPage;

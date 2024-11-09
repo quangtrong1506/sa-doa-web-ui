@@ -91,10 +91,10 @@ const NavHeader = () => {
             </div>
             <div className="ms-3 flex flex-col">
                      <span className="text-main text-lg font-bold line-clamp-1">
-                        {userReducer.user?.name || Role.User}
+                        {userReducer.user?.username || Role.User}
                      </span>
               <span className="italic text-sm text-black dark:text-white">
-                        {userReducer.user?.role || Role.User}
+                        {userReducer.user?.role_level || Role.User}
                      </span>
             </div>
           </div>
@@ -147,7 +147,7 @@ const NavHeader = () => {
               'flex gap-7 p-3 items-center cursor-pointer dark:hover:bg-bgHover_d hover:bg-bgBody_l rounded-xl w-full',
               userReducer.isLoading ||
               !userReducer.user ||
-              (userReducer.user && userReducer.user?.role !== Role.Admin)
+              (userReducer.user.role_level == 1)
                 ? 'hidden'
                 : 'flex',
             )}

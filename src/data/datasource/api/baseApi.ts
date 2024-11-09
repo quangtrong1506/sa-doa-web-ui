@@ -2,7 +2,7 @@
 import { APIClient, FetcherConfig } from './API';
 
 class BaseAPI<T> extends APIClient {
-   private resource: string;
+   private readonly resource: string;
 
    constructor(resource: string, config?: FetcherConfig) {
       super(config);
