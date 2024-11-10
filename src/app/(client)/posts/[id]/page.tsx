@@ -112,9 +112,9 @@ const PostDetail = () => {
                               'font-semibold hover:underline text-textLink_l dark:text-textLink_d text-lg',
                               post ? '' : 'hidden',
                            )}
-                           href={'/users/' + post?.author?.id}
+                           href={'/users/' + post?.author?._id}
                         >
-                           {post?.author?.name || BuildConfig.USER_LIST[0].name}
+                           {post?.author?.username || ''}
                         </Link>
                      </span>
                      <span

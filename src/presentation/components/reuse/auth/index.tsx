@@ -4,10 +4,11 @@ import Image from 'next/image';
 import React, { FormEvent, useEffect } from 'react';
 import Link from 'next/link';
 import { useDispatch } from 'react-redux';
-import { Status, User } from '@/data/datasource/model';
+import { User } from '@/data/datasource/model';
 import { setUser } from '@/data/datasource/redux/features/user';
 import { useRouter } from 'next/navigation';
 import { Routes } from '@/presentation/constants/Routes';
+import { userAPI } from '@/data/datasource/api/useAPI';
 
 const authStr = {
   signup: {
@@ -27,7 +28,7 @@ interface AuthViewModel {
   isSignup?: boolean;
   email?: string;
   password?: string;
-  repassword?: string;
+  rePassword?: string;
   isRemember?: boolean;
   isFailRePassword?: boolean;
   isFailPassword?: boolean;
@@ -69,7 +70,7 @@ const SaveAccount = (user: User) => {
     console.log('setUser', user);
     dispatch(setUser(user));
     router.push(Routes.Home);
-  }, []);
+  }, [dispatch, router, user]);
   return <></>;
 };
 
@@ -83,7 +84,7 @@ class Auth extends React.Component<{ isSignup: boolean }, AuthViewModel> {
       isSignup: prop.isSignup,
       email: '',
       password: '',
-      repassword: '',
+      rePassword: '',
       isRemember: false,
       isFailRePassword: false,
       isFailPassword: false,
@@ -100,35 +101,41 @@ class Auth extends React.Component<{ isSignup: boolean }, AuthViewModel> {
 
   onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const { changeCount, isSignup, email, password, repassword, isFailRePassword } = this.state;
+    const { changeCount, isSignup, email, password, rePassword, isFailRePassword } = this.state;
     if (isSignup) {
       this.setState({
-        isFailRePassword: password !== repassword,
+        isFailRePassword: password !== rePassword,
       });
-    } else {
-      let isOkay = false
-      BuildConfig.USER_LIST.forEach((value, index) => {
-        if (email === value.email && password === value.password && value.status === Status.Active) {
-          let count = changeCount ? changeCount : 0;
-          this.setState({
-            user: value,
-            changeCount: count + 1,
-          });
-          isOkay = true
-          alert('Đăng nhập thành công!');
-          return
-        }
-      });
-
-      if(!isOkay) {
-        alert('Đăng nhập thất bại!');
+      if (password == rePassword) {
+        const temp_name = `user${Date.now()}`;
+        userAPI.signup({ email: email, username: temp_name, password: password, display_name: temp_name }).then(r => {
+          console.log(r);
+          alert('Đăng ký thành công!');
+        }).catch(e => {
+          console.log(e);
+          alert('Đăng ký thất bại!');
+        });
       }
+    } else {
+      const user = { username: email, password: password };
+      userAPI.login(user).then(r => {
+        let count = changeCount ? changeCount : 0;
+        console.log(count + 1);
+        this.setState({
+          user: r.data.user,
+          changeCount: count + 1,
+        });
+        alert('Đăng nhập thành công!');
+      }).catch(e => {
+        console.log(e);
+        alert('Đăng nhập thất bại!');
+      });
     }
   }
 
   render() {
 
-    const { changeCount, user, isSignup, email, password, repassword, isFailRePassword, isFailPassword } = this.state;
+    const { changeCount, user, isSignup, email, password, rePassword, isFailRePassword, isFailPassword } = this.state;
     const str = isSignup ? authStr.signup : authStr.login;
     const strOpposite = isSignup ? authStr.login : authStr.signup;
     const pattern = PASSWORD_PATTERN[DEFAULT_PATTERN];
@@ -150,7 +157,7 @@ class Auth extends React.Component<{ isSignup: boolean }, AuthViewModel> {
             required={true}
             onChange={(event) => {
               this.setState({
-                repassword: event.target.value,
+                rePassword: event.target.value,
                 isFailRePassword: password !== event.target.value,
               });
             }}
@@ -194,11 +201,11 @@ class Auth extends React.Component<{ isSignup: boolean }, AuthViewModel> {
           </div>
         </>
       );
+      console.log("uuuuuuuuser", user);
       if (user) {
         saveEle =
-          <SaveAccount id={user.id} name={user.name} email={user.email}
-                       password={user.password} role={user.role}
-                       status={user.status}  avatar={user.avatar} bio={user.bio} fullName={user.fullName} phone={user.phone}/>;
+          <SaveAccount _id={user._id} address={user.address} display_name={user.display_name} is_deleted={user.is_deleted} password={user.password}
+                       phone={user.phone} role_level={user.role_level} updated_by={user.updated_by} username={user.username} />;
       }
     }
     return (

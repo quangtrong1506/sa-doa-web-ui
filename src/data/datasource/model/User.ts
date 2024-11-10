@@ -2,16 +2,23 @@ import { Status } from '@/data/datasource/model/Status';
 import { Role } from '@/data/datasource/model/Role';
 
 interface User {
-  id: string;
-  name: string;
-  fullName?: string;
-  email: string;
-  phone?: string;
-  avatar?: string;
-  password: string;
   bio?: string;
-  role: Role;
-  status: Status;
+  _id: string;
+  address: string;
+  email?: string;
+  role_level: number;
+  deleted_by?: string;
+  avatar?: string;
+  display_name: string;
+  created_by?: string;
+  deleted_at?: Date;
+  password: string;
+  is_deleted: number;
+  updated_at?: Date;
+  phone: string;
+  status?: string;
+  username: string;
+  updated_by: string;
 }
 
 export type { User };

@@ -4,8 +4,8 @@ type FetcherConfig = {
 };
 
 class APIClient {
-   private baseURL: string;
-   private headers: Record<string, string>;
+   private readonly baseURL: string;
+   private readonly headers: Record<string, string>;
 
    constructor(config: FetcherConfig = {}) {
       this.baseURL = config.baseURL || '';

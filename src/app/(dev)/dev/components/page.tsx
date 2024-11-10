@@ -3,7 +3,17 @@ import { Cosplayer, User } from '@/data/datasource/model';
 import { Post } from '@/data/datasource/model/Post';
 import PostItem from '@/presentation/components/reuse/post';
 
-const user: User = BuildConfig.USER_LIST[0];
+const user: User = {
+  _id: '',
+  address: '',
+  display_name: '',
+  is_deleted: 0,
+  password: '',
+  phone: '',
+  role_level: 0,
+  updated_by: '',
+  username: ''
+};
 
 const POST_DEMO: Post = {
    id: '1',
