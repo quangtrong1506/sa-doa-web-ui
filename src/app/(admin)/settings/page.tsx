@@ -6,6 +6,10 @@ import { EditIcon, EmailIcon, ProfileIcon, UploadIcon } from '@/presentation/com
 import { useAppSelector } from '@/data/datasource/redux/store';
 import { BuildConfig } from '@/config/config';
 import { useEffect, useState } from 'react';
+import { User } from '@/data/datasource/model';
+import { userAPI } from '@/data/datasource/api/useAPI';
+import { setUser } from '@/data/datasource/redux/features/user';
+import { TokenRepository } from '@/data/datasource/local/TokenRepository';
 
 // export const metadata: Metadata = {
 //   title: "Next.js Settings | TailAdmin - Next.js Dashboard Template",
@@ -19,12 +23,12 @@ const SettingsPage = () => {
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
   const [bio, setBio] = useState('');
-  const [avatar, setAvatar] = useState('');
+  const [avatar, setAvatar] = useState(BuildConfig.DEFAULT_USER_AVATAR);
 
   useEffect(() => {
     if (userReducer.user) {
       setFullName(userReducer.user.username);
-      setName(userReducer.user.username);
+      setName(userReducer.user.display_name);
       setPhone(userReducer.user.phone);
       setEmail(userReducer.user.email || '');
       setBio(userReducer.user.bio || '');
@@ -32,9 +36,31 @@ const SettingsPage = () => {
     }
   }, [userReducer.user]);
   const saveChange = () => {
-
-    // userAPI.createUser()
-    saveImage();
+    if (userReducer.user) {
+      const curr_user = userReducer.user
+      const user: User = {
+        _id: curr_user._id,
+        address: curr_user.address,
+        display_name: name,
+        is_deleted: curr_user.is_deleted,
+        password: curr_user.password,
+        phone: phone,
+        role_level: curr_user.role_level,
+        updated_by: curr_user._id,
+        username: fullName,
+        bio: bio,
+        email: email,
+        avatar: curr_user.avatar,
+      };
+      userAPI.updateUser(curr_user._id, user, TokenRepository.getToken() || '').then(r => {
+        alert("Update thành công!")
+        setUser(user)
+      }).catch(e => {
+        alert("Update thất bại!")
+        console.log(e);
+      })
+    }
+    // saveImage();
   };
 
   const saveImage = () => {
@@ -55,7 +81,7 @@ const SettingsPage = () => {
                 </h3>
               </div>
               <div className="p-7">
-                <form action="#">
+                <div>
                   <div className="mb-5.5 flex flex-col gap-5.5 sm:flex-row">
                     <div className="w-full sm:w-1/2">
                       <label
@@ -191,7 +217,7 @@ const SettingsPage = () => {
                       Save
                     </button>
                   </div>
-                </form>
+                </div>
               </div>
             </div>
           </div>
@@ -203,7 +229,7 @@ const SettingsPage = () => {
                 </h3>
               </div>
               <div className="p-7">
-                <form action="#">
+                <div>
                   <div className="mb-4 flex items-center gap-3">
                     <div className="h-14 w-14 rounded-full">
                       <Image
@@ -282,7 +308,7 @@ const SettingsPage = () => {
                       Save
                     </button>
                   </div>
-                </form>
+                </div>
               </div>
             </div>
           </div>

@@ -11,4 +11,6 @@ export enum Routes {
   Signup = "/signup",
   Search = "/search?q=",
   Settings = "/settings",
+  Profile = "/profile",
+  Users = "/users",
 }
