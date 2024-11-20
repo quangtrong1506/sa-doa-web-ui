@@ -9,6 +9,7 @@ import { setUser } from '@/data/datasource/redux/features/user';
 import { useRouter } from 'next/navigation';
 import { Routes } from '@/presentation/constants/Routes';
 import { userAPI } from '@/data/datasource/api/useAPI';
+import { TokenRepository } from '@/data/datasource/local/TokenRepository';
 
 const authStr = {
   signup: {
@@ -120,7 +121,8 @@ class Auth extends React.Component<{ isSignup: boolean }, AuthViewModel> {
       const user = { username: email, password: password };
       userAPI.login(user).then(r => {
         let count = changeCount ? changeCount : 0;
-        console.log(count + 1);
+        console.log(r);
+        TokenRepository.saveToken(r.data.token);
         this.setState({
           user: r.data.user,
           changeCount: count + 1,
@@ -201,11 +203,12 @@ class Auth extends React.Component<{ isSignup: boolean }, AuthViewModel> {
           </div>
         </>
       );
-      console.log("uuuuuuuuser", user);
       if (user) {
         saveEle =
-          <SaveAccount _id={user._id} address={user.address} display_name={user.display_name} is_deleted={user.is_deleted} password={user.password}
-                       phone={user.phone} role_level={user.role_level} updated_by={user.updated_by} username={user.username} />;
+          <SaveAccount _id={user._id} address={user.address} display_name={user.display_name}
+                       is_deleted={user.is_deleted} password={user.password}
+                       phone={user.phone} role_level={user.role_level} updated_by={user.updated_by}
+                       username={user.username} email={user.email} bio={user.bio} />;
       }
     }
     return (

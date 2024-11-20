@@ -9,12 +9,15 @@ import { BuildConfig } from '@/config/config';
 import { Routes } from '@/presentation/constants/Routes';
 import {
   ArrowLeftLongIcon,
-  CalendarIcon, ChartIcon,
+  CalendarIcon,
+  ChartIcon,
   DashboardIcon,
-  FormIcon, LogoutIcon,
+  FormIcon,
+  LogoutIcon,
   ProfileIcon,
   SettingIcon,
-  TableIcon, UiElementIcon,
+  TableIcon,
+  UiElementIcon,
 } from '@/presentation/components/icons';
 import { useClickAway } from 'react-use';
 
@@ -47,7 +50,14 @@ const menuGroups = [
           <ProfileIcon width={18} height={18}/>
         ),
         label: "Profile",
-        route: "/profile",
+        route: Routes.Profile,
+      },
+      {
+        icon: (
+          <ProfileIcon width={18} height={18}/>
+        ),
+        label: "Users",
+        route: Routes.Users,
       },
       {
         icon: (

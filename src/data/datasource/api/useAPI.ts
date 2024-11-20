@@ -19,7 +19,7 @@ class UserAPI extends BaseAPI<User> {
 
    // Hàm để cập nhật người dùng theo ID
    async updateUser(id: string, data: Partial<User>, token: string): Promise<User> {
-      return this._put<User>(`/${id}`, data, {
+      return this._put<User>(`/users/update`, data, {
          headers: {
             Authorization: `Bearer ${token}`,
          },

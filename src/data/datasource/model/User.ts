@@ -1,6 +1,3 @@
-import { Status } from '@/data/datasource/model/Status';
-import { Role } from '@/data/datasource/model/Role';
-
 interface User {
   bio?: string;
   _id: string;
