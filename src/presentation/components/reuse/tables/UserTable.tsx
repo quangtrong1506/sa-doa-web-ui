@@ -4,12 +4,25 @@ import { userAPI } from '@/data/datasource/api/useAPI';
 import { TokenRepository } from '@/data/datasource/local/TokenRepository';
 import { useEffect, useState } from 'react';
 import { BuildConfig } from '@/config/config';
+import { User } from '@/data/datasource/model';
 
+const user: User = {
+  _id: '',
+  address: '',
+  display_name: '',
+  is_deleted: 0,
+  password: '',
+  phone: '',
+  role_level: 0,
+  updated_by: '',
+  username: ''
+}
 const UserTable = () => {
-  const [users, setUsers] = useState([])
+
+  const [users, setUsers] = useState([user])
   useEffect(() => {
     const token = TokenRepository.getToken()
-    userAPI.findAllWithToken(token).then(r => {
+    userAPI.findAllWithToken(token?token:"").then(r => {
       console.log("findAllWithToken", r)
       setUsers(r.data.docs)
     }).catch(e => {
