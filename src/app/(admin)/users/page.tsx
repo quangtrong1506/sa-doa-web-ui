@@ -1,6 +1,6 @@
 import DefaultLayout from '@/presentation/components/admin-components/layouts/DefaultLayout';
 import Breadcrumb from '@/presentation/components/breadcrumbs';
-import TableOne from '@/presentation/components/reuse/tables/TableOne';
+import UserTable from '@/presentation/components/reuse/tables/UserTable';
 
 const TablesPage = () => {
   return (
@@ -8,7 +8,7 @@ const TablesPage = () => {
       <Breadcrumb pageName="Tables" />
 
       <div className="flex flex-col gap-10">
-        <TableOne />
+        <UserTable />
       </div>
     </DefaultLayout>
   );
