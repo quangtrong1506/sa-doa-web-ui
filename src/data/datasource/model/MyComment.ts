@@ -1,4 +1,4 @@
-import { User } from '@/data/datasource/model/User';
+import { User } from '@/data/datasource/model/api/User';
 
 
 declare interface MyComment {

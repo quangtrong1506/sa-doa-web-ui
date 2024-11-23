@@ -1,4 +1,4 @@
-import { User } from '@/data/datasource/model/User';
+import { User } from '@/data/datasource/model/api/User';
 import { Post } from '@/data/datasource/model/Post';
 import { MyUrl } from '@/data/datasource/model/MyUrl';
 
