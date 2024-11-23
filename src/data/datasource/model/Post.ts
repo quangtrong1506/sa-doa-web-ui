@@ -1,4 +1,4 @@
-import { User } from '@/data/datasource/model/User';
+import { User } from '@/data/datasource/model/api/User';
 import { Cosplayer } from '@/data/datasource/model/Cosplayer';
 import { MyComment } from '@/data/datasource/model/MyComment';
 
