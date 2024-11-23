@@ -1,5 +1,7 @@
 // src/utils/BaseAPI.ts
 import { APIClient, FetcherConfig } from './API';
+import { MyPage } from '@/data/datasource/model/api/response/MyPage';
+import { MyResponse } from '@/data/datasource/model/api/response/MyResponse';
 
 class BaseAPI<T> extends APIClient {
    private readonly resource: string;
@@ -21,6 +23,14 @@ class BaseAPI<T> extends APIClient {
    async findAll(): Promise<T[]> {
       return this._get<T[]>(`/${this.resource}`);
    }
+
+  async findAllWithToken(token: string): Promise<MyResponse<MyPage<T[]>>> {
+    return this._get<MyResponse<MyPage<T[]>>>(`/${this.resource}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
 
    async find(query: Record<string, any>): Promise<T[]> {
       const queryString = new URLSearchParams(query).toString();
