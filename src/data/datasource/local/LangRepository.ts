@@ -3,11 +3,11 @@ import { LangKey } from '@/presentation/components/string';
 const TOKEN_KEY = 'LangStorage';
 
 const saveLang = (token: LangKey) => {
-  localStorage.setItem(TOKEN_KEY, token.toString());
+  localStorage.setItem(TOKEN_KEY, JSON.stringify(token.toString()));
 };
 
 const getLang = () => {
-  return localStorage.getItem(TOKEN_KEY) as LangKey;
+  return JSON.parse(localStorage.getItem(TOKEN_KEY) as string);
 };
 
 const deleteLang = () => {
