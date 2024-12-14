@@ -4,8 +4,8 @@ import { User } from '@/data/datasource/model';
 class UserAPI extends BaseAPI<User> {
    constructor() {
       super('users', {
-         // baseURL: 'http://160.30.137.52:8080',
-         baseURL: 'http://localhost:8080',
+         baseURL: 'http://160.30.137.52:8080',
+         // baseURL: 'http://localhost:8080',
       });
    }
 
