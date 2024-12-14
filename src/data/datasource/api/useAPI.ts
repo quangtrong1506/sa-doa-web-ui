@@ -4,7 +4,8 @@ import { User } from '@/data/datasource/model';
 class UserAPI extends BaseAPI<User> {
    constructor() {
       super('users', {
-         baseURL: 'https://sa-doa-be.vercel.app',
+         // baseURL: 'http://160.30.137.52:8080',
+         baseURL: 'http://localhost:8080',
       });
    }
 
