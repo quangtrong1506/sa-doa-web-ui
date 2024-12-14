@@ -6,7 +6,6 @@ import { useEffect, useState } from 'react';
 import { userAPI } from '@/data/datasource/api/useAPI';
 import { TokenRepository } from '@/data/datasource/local/TokenRepository';
 import { LangKey, LangMap } from '@/presentation/components/string';
-import { BaseLang } from '@/presentation/components/string/BaseLang';
 import { LangRepository } from '@/data/datasource/local/LangRepository';
 import { User } from '@/data/datasource/model';
 
@@ -24,14 +23,16 @@ const user : User = {
 
 const UserTable = () => {
   const [users, setUsers] = useState([user]);
-  const key = LangRepository.getLang();
-  const currLang: BaseLang = LangMap(key ? key as LangKey : LangKey.Vi);
+
+  const [currLang, setCurrLang] = useState(LangMap(LangKey.En));
 
   useEffect(() => {
     userAPI.findAll(TokenRepository.getToken() || '').then(rs => {
-      console.log(rs);
+      // console.log(rs);
+      const key = LangRepository.getLang();
+      setCurrLang(LangMap(key ? key as LangKey : LangKey.Vi))
       setUsers(rs.data.docs);
-      console.log(users);
+      // console.log(users);
     }).catch(err => {
       console.log(err);
     });
